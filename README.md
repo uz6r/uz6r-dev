@@ -1,5 +1,11 @@
 # Uzair — Monorepo
 
+[![ci-web](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml)
+[![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-9.14-F69220?logo=pnpm)](https://pnpm.io/)
+
+This is my personal portfolio repo. Feel free to dive in to see how it operates.
+
 Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 
 ## Structure
