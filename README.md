@@ -9,7 +9,7 @@ Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 ├── apps/
 │   ├── api/                  # TODO: Golang + GraphQL (emails, portfolio)
 │   │   └── README.md
-│   └── web/                  # Next.js 15 (App Router, SSR)
+│   └── web/                  # Next.js 16 (App Router, SSR)
 │       ├── app/
 │       │   ├── layout.tsx
 │       │   ├── page.tsx
@@ -32,7 +32,7 @@ Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 
 | Layer         | Location            | Notes                                |
 | ------------- | ------------------- | ------------------------------------ |
-| **Frontend**  | `apps/web`          | Next.js 15, App Router, SSR          |
+| **Frontend**  | `apps/web`          | Next.js 16, App Router, SSR          |
 | **API**       | `apps/web/app/api/` | Next.js Route Handlers (recommended) |
 | **Backend**   | `apps/api` (TODO)   | Golang + GraphQL, emails, no DB      |
 | **Shared UI** | `packages/ui`       | 9ui components, import per-component |

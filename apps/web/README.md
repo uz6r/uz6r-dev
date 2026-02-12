@@ -1,10 +1,10 @@
 # Web — Frontend
 
-Next.js 15 portfolio frontend. App Router, SSR, Tailwind, 9ui components.
+Next.js 16 portfolio frontend. App Router, SSR, Tailwind, 9ui components.
 
 ## Stack
 
-- **Next.js 15** — App Router, Turbopack
+- **Next.js 16** — App Router, Turbopack
 - **React 19**
 - **Tailwind CSS**
 - **9ui** — Shared components from `@repo/ui` (manual imports)
