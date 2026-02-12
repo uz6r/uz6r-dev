@@ -1,0 +1,81 @@
+name: ci-api
+
+# TODO: Enable when apps/api is implemented (Go, Python, or Node.js)
+# on:
+#   push:
+#     branches: [main, master]
+#     paths:
+#       - "apps/api/**"
+#       - "packages/**"
+#       - "package.json"
+#       - "pnpm-lock.yaml"
+#       - ".github/workflows/ci-api.yml"
+#   pull_request:
+#     branches: [main, master]
+#     paths:
+#       - "apps/api/**"
+#       - "packages/**"
+#       - "package.json"
+#       - "pnpm-lock.yaml"
+#       - ".github/workflows/ci-api.yml"
+
+on:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    # Go template:
+    # ci:
+    #   runs-on: ubuntu-latest
+    #   defaults:
+    #     run:
+    #       working-directory: apps/api
+    #   steps:
+    #     - uses: actions/checkout@v4
+    #     - uses: actions/setup-go@v6
+    #       with:
+    #         go-version: "1.24"
+    #         cache-dependency-path: apps/api/go.sum
+    #     - run: go test ./...
+    #     - uses: golangci/golangci-lint-action@v6
+    #
+    # Python template:
+    # ci:
+    #   runs-on: ubuntu-latest
+    #   defaults:
+    #     run:
+    #       working-directory: apps/api
+    #   steps:
+    #     - uses: actions/checkout@v4
+    #     - uses: astral-sh/setup-uv@v4
+    #     - uses: actions/setup-python@v5
+    #       with:
+    #         python-version: "3.12"
+    #     - run: uv sync --locked --dev
+    #     - run: uv run ruff format --check .
+    #     - run: uv run pytest
+    #
+    # Node.js/TypeScript template:
+    # ci:
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     - uses: actions/checkout@v4
+    #     - uses: pnpm/action-setup@v4
+    #     - uses: actions/setup-node@v4
+    #       with:
+    #         node-version: "22"
+    #         cache: "pnpm"
+    #         cache-dependency-path: pnpm-lock.yaml
+    #     - run: pnpm install --frozen-lockfile
+    #     - run: pnpm turbo run lint --filter=api
+    #     - run: pnpm fmt:check
+    #     - run: pnpm turbo run build --filter=api
+    #     - run: pnpm turbo run test --filter=api
+
+    placeholder:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Add api CI when apps/api is implemented"

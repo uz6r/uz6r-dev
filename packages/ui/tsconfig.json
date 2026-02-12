@@ -1,0 +1,9 @@
+{
+    "extends": "@repo/config-typescript/ui.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": { "@/*": ["./src/*"] }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}

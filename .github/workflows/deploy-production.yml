@@ -1,0 +1,19 @@
+name: deploy-production
+
+# TODO: Configure when ready (Vercel production, main branch, etc.)
+# on:
+#   workflow_dispatch:
+#   workflow_call:
+
+on:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}
+    cancel-in-progress: true
+
+jobs:
+    deploy-production:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "Add deploy production steps (e.g. Vercel production)"

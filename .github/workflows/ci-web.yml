@@ -1,0 +1,70 @@
+name: ci-web
+
+on:
+    push:
+        branches: [main, master]
+        paths:
+            - "apps/web/**"
+            - "packages/**"
+            - "package.json"
+            - "pnpm-lock.yaml"
+            - "pnpm-workspace.yaml"
+            - "turbo.json"
+            - ".prettierrc"
+            - ".prettierignore"
+            - ".editorconfig"
+            - ".markdownlint.json"
+            - ".github/workflows/ci-web.yml"
+    pull_request:
+        branches: [main, master]
+        paths:
+            - "apps/web/**"
+            - "packages/**"
+            - "package.json"
+            - "pnpm-lock.yaml"
+            - "pnpm-workspace.yaml"
+            - "turbo.json"
+            - ".prettierrc"
+            - ".prettierignore"
+            - ".editorconfig"
+            - ".markdownlint.json"
+            - ".github/workflows/ci-web.yml"
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: .
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+                  cache: "pnpm"
+                  cache-dependency-path: pnpm-lock.yaml
+
+            - name: install
+              run: pnpm install --frozen-lockfile
+
+            - name: lint
+              run: pnpm lint
+
+            - name: format check
+              run: pnpm fmt:check
+
+            - name: markdown lint
+              run: pnpm lint:md
+
+            - name: build
+              run: pnpm build

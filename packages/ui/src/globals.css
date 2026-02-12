@@ -1,0 +1,7 @@
+/* 
+ * TODO: Run `npx shadcn@latest add @9ui/init` from packages/ui to add 9ui base styles.
+ * This adds CSS vars, light/dark themes, and root styling.
+ * The init adds to this file - you may need to merge with apps/web globals.css
+ * or ensure both apps pull 9ui theme vars.
+ * See: https://9ui.dev/docs/getting-started/installation
+ */
