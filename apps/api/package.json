@@ -1,0 +1,13 @@
+{
+    "name": "api",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "generate": "make generate",
+        "build": "make build",
+        "dev": "make dev",
+        "test": "make test",
+        "clean": "make clean",
+        "deps": "make deps"
+    }
+}

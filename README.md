@@ -1,5 +1,6 @@
 # Uzair — Monorepo
 
+[![ci-api](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml)
 [![ci-web](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-10.29.3-F69220?logo=pnpm)](https://pnpm.io/)
@@ -13,7 +14,7 @@ Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 ```text
 ├── .env.example              # Vercel + portfolio env template
 ├── apps/
-│   ├── api/                  # TODO: Golang + GraphQL (emails, portfolio)
+│   ├── api/                  # Golang + GraphQL API
 │   │   └── README.md
 │   └── web/                  # Next.js 16 (App Router, SSR)
 │       ├── app/
@@ -40,7 +41,7 @@ Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 | ------------- | ------------------- | ------------------------------------ |
 | **Frontend**  | `apps/web`          | Next.js 16, App Router, SSR          |
 | **API**       | `apps/web/app/api/` | Next.js Route Handlers (recommended) |
-| **Backend**   | `apps/api` (TODO)   | Golang + GraphQL, emails, no DB      |
+| **Backend**   | `apps/api`          | Golang + GraphQL API (stateless)     |
 | **Shared UI** | `packages/ui`       | 9ui components, import per-component |
 
 ## 9ui — Manual imports
@@ -56,8 +57,8 @@ pnpm install
 pnpm dev           # Runs all apps
 pnpm build         # Turbo build
 pnpm lint          # Turbo lint
-pnpm fmt           # Prettier
-pnpm fmt:check     # Prettier check
+pnpm fmt           # Format all (markdown, JS/TS, Go)
+pnpm fmt:check     # Check formatting
 pnpm lint:md       # Markdown lint
 ```
 

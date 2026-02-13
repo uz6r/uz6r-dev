@@ -11,6 +11,8 @@ apps/api/
 │       └── graph/
 │           └── schema/
 │               └── content.graphqls    # GraphQL schema definitions
+├── data/
+│   └── content.json                    # Content data file (loaded by resolver)
 ├── graph/                               # Generated GraphQL code
 │   ├── generated.go                     # Generated executable schema
 │   ├── content.resolvers.go             # Resolver implementations
@@ -21,6 +23,7 @@ apps/api/
 ├── server.go                            # HTTP server entry point
 ├── tools.go                             # Build tools (ensures dependencies)
 ├── generate.sh                          # Script to generate GraphQL code
+├── package.json                         # pnpm workspace package config
 └── Makefile                             # Make targets (source of truth)
 ```
 
@@ -53,6 +56,9 @@ go run github.com/99designs/gqlgen generate
 ### Run the Server
 
 ```bash
+# From monorepo root (runs API + web in parallel)
+pnpm dev
+
 # Using Make (recommended)
 make dev
 
@@ -99,6 +105,10 @@ After modifying the schema:
 1. Run `make generate` or `./generate.sh`
 2. Implement the resolver methods in `graph/*.resolvers.go`
 3. Test your changes
+
+## Content Data
+
+Content data is loaded from `data/content.json` by the `Contents` resolver. The file contains an array of content objects with `id`, `type`, `title`, and `metadata` fields. The `metadata` field can be any JSON object and will be serialized as a JSON string in the GraphQL response.
 
 ## Dependencies
 

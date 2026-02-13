@@ -1,0 +1,30 @@
+[
+    {
+        "id": "1",
+        "type": "project",
+        "title": "Portfolio Website",
+        "metadata": {
+            "description": "Personal portfolio built with Next.js and GraphQL",
+            "tech": ["Next.js", "GraphQL", "TypeScript"],
+            "url": "https://github.com/uz6r/uz6r"
+        }
+    },
+    {
+        "id": "2",
+        "type": "project",
+        "title": "API Service",
+        "metadata": {
+            "description": "GraphQL API built with Go and gqlgen",
+            "tech": ["Go", "GraphQL", "gqlgen"]
+        }
+    },
+    {
+        "id": "3",
+        "type": "blog",
+        "title": "Getting Started with GraphQL",
+        "metadata": {
+            "description": "A guide to building GraphQL APIs",
+            "published": "2024-01-15"
+        }
+    }
+]

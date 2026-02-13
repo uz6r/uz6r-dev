@@ -7,19 +7,56 @@ package graph
 
 import (
 	"context"
+	"encoding/json"
+	"os"
+	"path/filepath"
 
 	"github.com/uz6r/api/graph/model"
 )
 
 // Contents is the resolver for the contents field.
 func (r *queryResolver) Contents(ctx context.Context, typeArg *string) ([]*model.Content, error) {
-	return []*model.Content{
-		{
-			ID:    "1e42d389-8e29-4984-a1ee-42e3b5e45702",
-			Type:  "project",
-			Title: "Project 1",
-		},
-	}, nil
+	// Read the file from apps/api/data/content.json
+	// Path is relative to the working directory (typically apps/api/)
+	filePath := filepath.Join("data", "content.json")
+
+	// Read the file
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	// Use a temporary struct to handle metadata as object
+	type tempContent struct {
+		ID       string          `json:"id"`
+		Type     string          `json:"type"`
+		Title    string          `json:"title"`
+		Metadata json.RawMessage `json:"metadata"`
+	}
+
+	var tempContents []tempContent
+	if err := json.Unmarshal(data, &tempContents); err != nil {
+		return nil, err
+	}
+
+	// Convert to []*model.Content, converting metadata objects to JSON strings
+	contents := make([]*model.Content, len(tempContents))
+	for i, tc := range tempContents {
+		var metadataStr *string
+		if len(tc.Metadata) > 0 && string(tc.Metadata) != "null" {
+			metadataJSON := string(tc.Metadata)
+			metadataStr = &metadataJSON
+		}
+
+		contents[i] = &model.Content{
+			ID:       tc.ID,
+			Type:     tc.Type,
+			Title:    tc.Title,
+			Metadata: metadataStr,
+		}
+	}
+
+	return contents, nil
 }
 
 // Query returns QueryResolver implementation.
