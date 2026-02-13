@@ -7,8 +7,8 @@
         "dev": "turbo run dev",
         "build": "turbo run build",
         "lint": "turbo run lint",
-        "fmt": "markdownlint --fix '**/*.md' --ignore node_modules && prettier --write .",
-        "fmt:check": "prettier --check .",
+        "fmt": "markdownlint --fix '**/*.md' --ignore node_modules && prettier --write . && cd apps/api && make fmt",
+        "fmt:check": "prettier --check . && cd apps/api && go fmt ./...",
         "lint:md": "markdownlint '**/*.md' --ignore node_modules",
         "clean": "turbo run clean && rm -rf node_modules"
     },

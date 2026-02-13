@@ -1,0 +1,12 @@
+scalar JSON
+
+type Content {
+    id: ID!
+    type: String!
+    title: String!
+    metadata: JSON
+}
+
+type Query {
+    contents(type: String): [Content!]!
+}
