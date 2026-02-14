@@ -4,7 +4,7 @@ import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui/react";
 import { XIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 function Dialog({ ...props }: React.ComponentProps<typeof BaseDialog.Root>) {
     return <BaseDialog.Root data-slot="dialog" {...props} />;

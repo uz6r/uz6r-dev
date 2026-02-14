@@ -3,8 +3,8 @@
 import { Toast } from "@base-ui/react/toast";
 import { CircleAlert, CircleCheck, Info, Loader, TriangleAlert } from "lucide-react";
 
-import { buttonVariants } from "@/components/button";
-import { cn } from "@/lib/utils";
+import { buttonVariants } from "./button";
+import { cn } from "../lib/utils";
 
 export const toastManager = Toast.createToastManager();
 export const useToast = Toast.useToastManager;

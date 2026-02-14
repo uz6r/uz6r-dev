@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 function ScrollArea({
     className,

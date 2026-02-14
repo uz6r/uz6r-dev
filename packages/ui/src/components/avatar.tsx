@@ -4,7 +4,7 @@ import * as React from "react";
 import { Avatar as AvatarBase } from "@base-ui/react/avatar";
 import { cva, VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 const avatarVariants = cva("relative flex shrink-0 overflow-hidden rounded-full", {
     variants: {
