@@ -3,7 +3,7 @@ import { ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "Uzair",
+    title: "Uzair Zahari",
     description: "Portfolio",
 };
 
@@ -29,7 +29,7 @@ export default function RootLayout({
                     }}
                 />
             </head>
-            <body className="root antialiased">
+            <body className="root antialiased safe-area-insets">
                 <ToastProvider>{children}</ToastProvider>
             </body>
         </html>

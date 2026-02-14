@@ -2,19 +2,12 @@ import { Badge } from "@repo/ui/badge";
 import { Separator } from "@repo/ui/separator";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import type { Entry } from "@/types";
+import type { Entry } from "@/types/entry";
 
 interface EntriesListProps {
     entries: Entry[];
     title?: string;
 }
-
-const entryTypeLabel: Record<NonNullable<Entry["type"]>, string> = {
-    blog: "Blog",
-    talk: "Talk",
-    writing: "Writing",
-    other: "Other",
-};
 
 export function EntriesList({ entries, title = "Writing & talks" }: EntriesListProps) {
     return (
@@ -30,10 +23,12 @@ export function EntriesList({ entries, title = "Writing & talks" }: EntriesListP
                             <article className="py-2">
                                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                                     <div className="min-w-0">
-                                        {entry.href ? (
+                                        {entry.url ? (
                                             <a
-                                                href={entry.href}
+                                                href={entry.url}
                                                 className="font-medium hover:underline"
+                                                rel="noopener noreferrer"
+                                                target="_blank"
                                             >
                                                 {entry.title}
                                             </a>
@@ -45,19 +40,19 @@ export function EntriesList({ entries, title = "Writing & talks" }: EntriesListP
                                                 variant="outline"
                                                 className="ml-2 text-xs font-normal"
                                             >
-                                                {entryTypeLabel[entry.type]}
+                                                {entry.type}
                                             </Badge>
                                         )}
                                     </div>
-                                    {entry.date && (
+                                    {(entry.published ?? entry.created) && (
                                         <span className="text-muted-foreground shrink-0 text-sm">
-                                            {entry.date}
+                                            {entry.published ?? entry.created}
                                         </span>
                                     )}
                                 </div>
-                                {entry.summary && (
+                                {entry.description && (
                                     <p className="text-muted-foreground mt-1 text-sm">
-                                        {entry.summary}
+                                        {entry.description}
                                     </p>
                                 )}
                             </article>

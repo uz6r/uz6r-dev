@@ -1,97 +1,36 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@repo/ui/card";
-import { Badge } from "@repo/ui/badge";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import type { Project } from "@/types";
+import { ProjectCardDrawer } from "@/components/sections/project-card-drawer";
+import type { Entry } from "@/types/entry";
+
+const PROJECT_TYPE = "project";
 
 interface ProjectsGridProps {
-    projects: Project[];
+    entries: Entry[];
     title?: string;
 }
 
-export function ProjectsGrid({ projects, title = "Projects" }: ProjectsGridProps) {
+export function ProjectsGrid({ entries, title = "Projects" }: ProjectsGridProps) {
+    const projects = entries.filter((e) => e.type === PROJECT_TYPE);
+
     return (
         <Section>
             <Container>
-                <h2 className="text-muted-foreground mb-8 text-sm font-medium uppercase tracking-wider">
+                <h2
+                    className="animate-fade-in-up text-muted-foreground mb-8 text-sm font-medium uppercase tracking-wider opacity-0"
+                    style={{ animationDelay: "100ms" }}
+                >
                     {title}
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2">
-                    {projects.map((project) => (
-                        <Card
-                            key={project.id}
-                            className={
-                                project.href ? "transition-colors hover:border-primary/30" : ""
-                            }
+                    {projects.map((entry, i) => (
+                        <div
+                            key={entry.id}
+                            className="animate-fade-in-up opacity-0"
+                            style={{ animationDelay: `${200 + i * 80}ms` }}
                         >
-                            {project.href ? (
-                                <a href={project.href} className="block">
-                                    <CardHeader className="pb-2">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <CardTitle className="text-base">
-                                                {project.title}
-                                            </CardTitle>
-                                            {project.year && (
-                                                <span className="text-muted-foreground shrink-0 text-xs">
-                                                    {project.year}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <CardDescription className="line-clamp-2 text-sm">
-                                            {project.description}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    {project.tags?.length ? (
-                                        <CardContent className="pt-0">
-                                            <div className="flex flex-wrap gap-1.5">
-                                                {project.tags.map((tag) => (
-                                                    <Badge
-                                                        key={tag}
-                                                        variant="secondary"
-                                                        className="text-xs font-normal"
-                                                    >
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </CardContent>
-                                    ) : null}
-                                </a>
-                            ) : (
-                                <>
-                                    <CardHeader className="pb-2">
-                                        <div className="flex items-start justify-between gap-2">
-                                            <CardTitle className="text-base">
-                                                {project.title}
-                                            </CardTitle>
-                                            {project.year && (
-                                                <span className="text-muted-foreground shrink-0 text-xs">
-                                                    {project.year}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <CardDescription className="line-clamp-2 text-sm">
-                                            {project.description}
-                                        </CardDescription>
-                                    </CardHeader>
-                                    {project.tags?.length ? (
-                                        <CardContent className="pt-0">
-                                            <div className="flex flex-wrap gap-1.5">
-                                                {project.tags.map((tag) => (
-                                                    <Badge
-                                                        key={tag}
-                                                        variant="secondary"
-                                                        className="text-xs font-normal"
-                                                    >
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </CardContent>
-                                    ) : null}
-                                </>
-                            )}
-                        </Card>
+                            <ProjectCardDrawer entry={entry} />
+                        </div>
                     ))}
                 </div>
             </Container>

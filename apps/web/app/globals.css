@@ -76,6 +76,8 @@
         scroll-behavior: smooth;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        /* Always reserve space for scrollbar so layout never janks (old Safari compatible) */
+        overflow-y: scroll;
     }
 
     body {
@@ -86,5 +88,13 @@
     .root {
         isolation: isolate;
         min-height: 100vh;
+    }
+
+    /* iPhone notch, Dynamic Island, home indicator — add padding so content stays in safe area */
+    .safe-area-insets {
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        padding-left: env(safe-area-inset-left, 0px);
     }
 }

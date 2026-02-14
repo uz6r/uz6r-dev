@@ -1,5 +1,5 @@
 export const heroData = {
-    name: "Your Name",
-    headline: "Software Engineer",
-    bio: "I build systems and products. Focused on reliability, clarity, and shipping.",
+    name: "Uzair Zahari",
+    headline: "Full stack software engineer",
+    bio: "I build backend systems and workflows and care about scalable architecture. I work with Next.js, TypeScript, Python, Go, GraphQL, and PostgreSQL.",
 };
