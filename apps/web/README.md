@@ -24,12 +24,19 @@ pnpm lint     # ESLint
 app/
 ├── api/           # Route Handlers (optional)
 ├── globals.css    # Tailwind + 9ui base (run @9ui/init to add)
-├── layout.tsx     # Root layout (root class for 9ui)
+├── layout.tsx     # Root layout (ToastProvider, root class for 9ui)
 └── page.tsx       # Home
+components/
+└── ui/            # Re-exports from @repo/ui (e.g. toast for @/ path)
 ```
 
 ## Import UI
 
+From the shared package or app re-exports:
+
 ```tsx
 import { Button } from "@repo/ui/button";
+import { ToastProvider, useToast } from "@/components/ui/toast";
 ```
+
+Toast is provided in the root layout. Use `useToast()` in client components to add toasts (e.g. `useToast().add({ title: "Done", type: "success" })`).

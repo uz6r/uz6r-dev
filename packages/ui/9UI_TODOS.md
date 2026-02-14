@@ -8,6 +8,7 @@
 packages/ui/
 ├── src/
 │   ├── components/           # One file per 9ui component
+│   │   ├── avatar.tsx        ✓ (added)
 │   │   ├── button.tsx        ✓ (added)
 │   │   ├── card.tsx          TODO: npx shadcn add @9ui/card
 │   │   ├── input.tsx         TODO: npx shadcn add @9ui/input
@@ -26,28 +27,18 @@ In `apps/web` (or any app):
 ```tsx
 // Import each component individually — no barrel exports
 import { Button } from "@repo/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@repo/ui/avatar";
 import { Card } from "@repo/ui/card";
 ```
 
-Add exports in `packages/ui/package.json` when you add new components:
-
-```json
-{
-    "exports": {
-        "./utils": "./src/lib/utils.ts",
-        "./button": "./src/components/button.tsx",
-        "./card": "./src/components/card.tsx"
-    }
-}
-```
+New components in `src/components/` are exposed via the wildcard export; no need to add each to `package.json`.
 
 ## TODOs
 
 - [ ] Run `npx shadcn@latest add @9ui/init` from **packages/ui** (or apps/web if you prefer styles there)
 - [ ] Add `root` class to apps/web layout: `<body className="root antialiased">` ✓ (done)
-- [ ] **Note**: In packages/ui, use `../lib/utils` instead of `@/lib/utils` — Next.js doesn't resolve @ for transpiled packages
+- [ ] **Note**: In packages/ui, use `@/lib/utils` for `cn` — tsconfig has `@/*` → `./src/*`
 - [ ] Add components as needed: `cd packages/ui && npx shadcn add @9ui/card`
-- [ ] For each new component: add to package.json exports
 - [ ] Run `npx shadcn@latest mcp init` (optional) for AI-assisted component usage
 
 ## Available 9ui components

@@ -18,9 +18,11 @@ Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 │   │   └── README.md
 │   └── web/                  # Next.js 16 (App Router, SSR)
 │       ├── app/
-│       │   ├── layout.tsx
+│       │   ├── layout.tsx    # Root layout (ToastProvider)
 │       │   ├── page.tsx
 │       │   └── globals.css
+│       ├── components/
+│       │   └── ui/           # Re-exports from @repo/ui
 │       ├── vercel.json
 │       └── README.md
 ├── packages/
@@ -47,8 +49,9 @@ Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
 ## 9ui — Manual imports
 
 - See `packages/ui/9UI_TODOS.md` for setup.
-- Add: `cd packages/ui && npx shadcn add @9ui/button`
-- Import: `import { Button } from "@repo/ui/button"`
+- Add: `cd packages/ui && npx shadcn add @9ui/<component>`
+- Import: `import { Button } from "@repo/ui/button"` or from app: `import { useToast } from "@/components/ui/toast"`
+- Toast: `ToastProvider` wraps the app in `apps/web` layout; use `useToast()` in client components.
 
 ## Commands
 
