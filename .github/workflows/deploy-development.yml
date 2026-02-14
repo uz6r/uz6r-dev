@@ -1,6 +1,6 @@
-# Deploy web app to Vercel production after ci-web passes on main/master.
+# Deploy web app to Vercel preview (development) after ci-web passes on main/master.
 # Required GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
-name: deploy-production
+name: deploy-development
 
 on:
     workflow_run:
@@ -22,12 +22,11 @@ jobs:
               with:
                   ref: ${{ github.event.workflow_run.head_sha }}
 
-            - name: Deploy to Vercel (production)
+            - name: Deploy to Vercel (preview / development)
               uses: amondnet/vercel-action@v25
               with:
                   vercel-token: ${{ secrets.VERCEL_TOKEN }}
                   vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
                   vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-                  vercel-args: --prod
                   working-directory: apps/web
                   github-comment: false
