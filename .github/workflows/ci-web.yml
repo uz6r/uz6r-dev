@@ -55,6 +55,10 @@ jobs:
             - name: install
               run: pnpm install --frozen-lockfile
 
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: "stable"
+
             - name: lint
               run: pnpm lint
 
