@@ -2,11 +2,19 @@
 
 package model
 
-type Content struct {
-	ID       string  `json:"id"`
-	Type     string  `json:"type"`
-	Title    string  `json:"title"`
-	Metadata *string `json:"metadata,omitempty"`
+type Entry struct {
+	ID          string   `json:"id"`
+	Type        string   `json:"type"`
+	Title       string   `json:"title"`
+	Slug        *string  `json:"slug,omitempty"`
+	Description *string  `json:"description,omitempty"`
+	URL         *string  `json:"url,omitempty"`
+	ImageUrls   []string `json:"image_urls,omitempty"`
+	Created     *string  `json:"created,omitempty"`
+	Updated     *string  `json:"updated,omitempty"`
+	Published   *string  `json:"published,omitempty"`
+	Archived    *bool    `json:"archived,omitempty"`
+	Metadata    *string  `json:"metadata,omitempty"`
 }
 
 type Query struct {

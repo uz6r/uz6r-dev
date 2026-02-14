@@ -14,49 +14,60 @@ import (
 	"github.com/uz6r/api/graph/model"
 )
 
-// Contents is the resolver for the contents field.
-func (r *queryResolver) Contents(ctx context.Context, typeArg *string) ([]*model.Content, error) {
-	// Read the file from apps/api/data/content.json
-	// Path is relative to the working directory (typically apps/api/)
-	filePath := filepath.Join("data", "content.json")
-
-	// Read the file
+// Entries is the resolver for the entries field.
+func (r *queryResolver) Entries(ctx context.Context, typeArg *string) ([]*model.Entry, error) {
+	filePath := filepath.Join("data", "entries.json")
 	data, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, err
 	}
 
-	// Use a temporary struct to handle metadata as object
-	type tempContent struct {
-		ID       string          `json:"id"`
-		Type     string          `json:"type"`
-		Title    string          `json:"title"`
-		Metadata json.RawMessage `json:"metadata"`
+	type tempEntry struct {
+		ID          string          `json:"id"`
+		Type        string          `json:"type"`
+		Title       string          `json:"title"`
+		Slug        *string         `json:"slug"`
+		Description *string         `json:"description"`
+		URL         *string         `json:"url"`
+		ImageURLs   []string        `json:"image_urls"`
+		Created     *string         `json:"created"`
+		Updated     *string         `json:"updated"`
+		Published   *string         `json:"published"`
+		Archived    *bool           `json:"archived"`
+		Metadata    json.RawMessage `json:"metadata"`
 	}
 
-	var tempContents []tempContent
-	if err := json.Unmarshal(data, &tempContents); err != nil {
+	var tempEntries []tempEntry
+	if err := json.Unmarshal(data, &tempEntries); err != nil {
 		return nil, err
 	}
 
-	// Convert to []*model.Content, converting metadata objects to JSON strings
-	contents := make([]*model.Content, len(tempContents))
-	for i, tc := range tempContents {
+	var entries []*model.Entry
+	for _, te := range tempEntries {
+		if typeArg != nil && *typeArg != "" && te.Type != *typeArg {
+			continue
+		}
 		var metadataStr *string
-		if len(tc.Metadata) > 0 && string(tc.Metadata) != "null" {
-			metadataJSON := string(tc.Metadata)
-			metadataStr = &metadataJSON
+		if len(te.Metadata) > 0 && string(te.Metadata) != "null" && string(te.Metadata) != "{}" {
+			s := string(te.Metadata)
+			metadataStr = &s
 		}
-
-		contents[i] = &model.Content{
-			ID:       tc.ID,
-			Type:     tc.Type,
-			Title:    tc.Title,
-			Metadata: metadataStr,
-		}
+		entries = append(entries, &model.Entry{
+			ID:          te.ID,
+			Type:        te.Type,
+			Title:       te.Title,
+			Slug:        te.Slug,
+			Description: te.Description,
+			URL:         te.URL,
+			ImageUrls:   te.ImageURLs,
+			Created:     te.Created,
+			Updated:     te.Updated,
+			Published:   te.Published,
+			Archived:    te.Archived,
+			Metadata:    metadataStr,
+		})
 	}
-
-	return contents, nil
+	return entries, nil
 }
 
 // Query returns QueryResolver implementation.

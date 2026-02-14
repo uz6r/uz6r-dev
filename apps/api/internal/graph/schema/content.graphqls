@@ -1,12 +1,22 @@
 scalar JSON
 
-type Content {
+# Generic entry for projects, case studies, blogs, etc.
+# First-class fields for common needs; metadata for type-specific extras.
+type Entry {
     id: ID!
     type: String!
     title: String!
+    slug: String
+    description: String
+    url: String
+    image_urls: [String!]
+    created: String
+    updated: String
+    published: String
+    archived: Boolean
     metadata: JSON
 }
 
 type Query {
-    contents(type: String): [Content!]!
+    entries(type: String): [Entry!]!
 }

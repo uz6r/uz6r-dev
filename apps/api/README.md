@@ -12,7 +12,7 @@ apps/api/
 │           └── schema/
 │               └── content.graphqls    # GraphQL schema definitions
 ├── data/
-│   └── content.json                    # Content data file (loaded by resolver)
+│   └── entries.json                   # Entry data (loaded by resolver)
 ├── graph/                               # Generated GraphQL code
 │   ├── generated.go                     # Generated executable schema
 │   ├── content.resolvers.go             # Resolver implementations
@@ -106,9 +106,9 @@ After modifying the schema:
 2. Implement the resolver methods in `graph/*.resolvers.go`
 3. Test your changes
 
-## Content Data
+## Entry Data
 
-Content data is loaded from `data/content.json` by the `Contents` resolver. The file contains an array of content objects with `id`, `type`, `title`, and `metadata` fields. The `metadata` field can be any JSON object and will be serialized as a JSON string in the GraphQL response.
+Entry data is loaded from `data/entries.json` by the `entries` query. Each entry has first-class fields: `id`, `type`, `title`, `slug`, `description`, `created`, `published`, `archived`, and optional `metadata` (JSON) for type-specific data (e.g. tech stack, URLs). Use the `type` argument to filter (e.g. `entries(type: "project")`).
 
 ## Dependencies
 

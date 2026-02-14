@@ -45,20 +45,28 @@ type DirectiveRoot struct {
 }
 
 type ComplexityRoot struct {
-	Content struct {
-		ID       func(childComplexity int) int
-		Metadata func(childComplexity int) int
-		Title    func(childComplexity int) int
-		Type     func(childComplexity int) int
+	Entry struct {
+		Archived    func(childComplexity int) int
+		Created     func(childComplexity int) int
+		Description func(childComplexity int) int
+		ID          func(childComplexity int) int
+		ImageUrls   func(childComplexity int) int
+		Metadata    func(childComplexity int) int
+		Published   func(childComplexity int) int
+		Slug        func(childComplexity int) int
+		Title       func(childComplexity int) int
+		Type        func(childComplexity int) int
+		URL         func(childComplexity int) int
+		Updated     func(childComplexity int) int
 	}
 
 	Query struct {
-		Contents func(childComplexity int, typeArg *string) int
+		Entries func(childComplexity int, typeArg *string) int
 	}
 }
 
 type QueryResolver interface {
-	Contents(ctx context.Context, typeArg *string) ([]*model.Content, error)
+	Entries(ctx context.Context, typeArg *string) ([]*model.Entry, error)
 }
 
 type executableSchema struct {
@@ -80,42 +88,90 @@ func (e *executableSchema) Complexity(ctx context.Context, typeName, field strin
 	_ = ec
 	switch typeName + "." + field {
 
-	case "Content.id":
-		if e.complexity.Content.ID == nil {
+	case "Entry.archived":
+		if e.complexity.Entry.Archived == nil {
 			break
 		}
 
-		return e.complexity.Content.ID(childComplexity), true
-	case "Content.metadata":
-		if e.complexity.Content.Metadata == nil {
+		return e.complexity.Entry.Archived(childComplexity), true
+	case "Entry.created":
+		if e.complexity.Entry.Created == nil {
 			break
 		}
 
-		return e.complexity.Content.Metadata(childComplexity), true
-	case "Content.title":
-		if e.complexity.Content.Title == nil {
+		return e.complexity.Entry.Created(childComplexity), true
+	case "Entry.description":
+		if e.complexity.Entry.Description == nil {
 			break
 		}
 
-		return e.complexity.Content.Title(childComplexity), true
-	case "Content.type":
-		if e.complexity.Content.Type == nil {
+		return e.complexity.Entry.Description(childComplexity), true
+	case "Entry.id":
+		if e.complexity.Entry.ID == nil {
 			break
 		}
 
-		return e.complexity.Content.Type(childComplexity), true
-
-	case "Query.contents":
-		if e.complexity.Query.Contents == nil {
+		return e.complexity.Entry.ID(childComplexity), true
+	case "Entry.image_urls":
+		if e.complexity.Entry.ImageUrls == nil {
 			break
 		}
 
-		args, err := ec.field_Query_contents_args(ctx, rawArgs)
+		return e.complexity.Entry.ImageUrls(childComplexity), true
+	case "Entry.metadata":
+		if e.complexity.Entry.Metadata == nil {
+			break
+		}
+
+		return e.complexity.Entry.Metadata(childComplexity), true
+	case "Entry.published":
+		if e.complexity.Entry.Published == nil {
+			break
+		}
+
+		return e.complexity.Entry.Published(childComplexity), true
+	case "Entry.slug":
+		if e.complexity.Entry.Slug == nil {
+			break
+		}
+
+		return e.complexity.Entry.Slug(childComplexity), true
+	case "Entry.title":
+		if e.complexity.Entry.Title == nil {
+			break
+		}
+
+		return e.complexity.Entry.Title(childComplexity), true
+	case "Entry.type":
+		if e.complexity.Entry.Type == nil {
+			break
+		}
+
+		return e.complexity.Entry.Type(childComplexity), true
+	case "Entry.url":
+		if e.complexity.Entry.URL == nil {
+			break
+		}
+
+		return e.complexity.Entry.URL(childComplexity), true
+	case "Entry.updated":
+		if e.complexity.Entry.Updated == nil {
+			break
+		}
+
+		return e.complexity.Entry.Updated(childComplexity), true
+
+	case "Query.entries":
+		if e.complexity.Query.Entries == nil {
+			break
+		}
+
+		args, err := ec.field_Query_entries_args(ctx, rawArgs)
 		if err != nil {
 			return 0, false
 		}
 
-		return e.complexity.Query.Contents(childComplexity, args["type"].(*string)), true
+		return e.complexity.Query.Entries(childComplexity, args["type"].(*string)), true
 
 	}
 	return 0, false
@@ -208,15 +264,25 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 var sources = []*ast.Source{
 	{Name: "../internal/graph/schema/content.graphqls", Input: `scalar JSON
 
-type Content {
+# Generic entry for projects, case studies, blogs, etc.
+# First-class fields for common needs; metadata for type-specific extras.
+type Entry {
     id: ID!
     type: String!
     title: String!
+    slug: String
+    description: String
+    url: String
+    image_urls: [String!]
+    created: String
+    updated: String
+    published: String
+    archived: Boolean
     metadata: JSON
 }
 
 type Query {
-    contents(type: String): [Content!]!
+    entries(type: String): [Entry!]!
 }
 `, BuiltIn: false},
 }
@@ -237,7 +303,7 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 	return args, nil
 }
 
-func (ec *executionContext) field_Query_contents_args(ctx context.Context, rawArgs map[string]any) (map[string]any, error) {
+func (ec *executionContext) field_Query_entries_args(ctx context.Context, rawArgs map[string]any) (map[string]any, error) {
 	var err error
 	args := map[string]any{}
 	arg0, err := graphql.ProcessArgField(ctx, rawArgs, "type", ec.unmarshalOString2ᚖstring)
@@ -300,12 +366,12 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _Content_id(ctx context.Context, field graphql.CollectedField, obj *model.Content) (ret graphql.Marshaler) {
+func (ec *executionContext) _Entry_id(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
 	return graphql.ResolveField(
 		ctx,
 		ec.OperationContext,
 		field,
-		ec.fieldContext_Content_id,
+		ec.fieldContext_Entry_id,
 		func(ctx context.Context) (any, error) {
 			return obj.ID, nil
 		},
@@ -316,9 +382,9 @@ func (ec *executionContext) _Content_id(ctx context.Context, field graphql.Colle
 	)
 }
 
-func (ec *executionContext) fieldContext_Content_id(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Entry_id(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
-		Object:     "Content",
+		Object:     "Entry",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -329,12 +395,12 @@ func (ec *executionContext) fieldContext_Content_id(_ context.Context, field gra
 	return fc, nil
 }
 
-func (ec *executionContext) _Content_type(ctx context.Context, field graphql.CollectedField, obj *model.Content) (ret graphql.Marshaler) {
+func (ec *executionContext) _Entry_type(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
 	return graphql.ResolveField(
 		ctx,
 		ec.OperationContext,
 		field,
-		ec.fieldContext_Content_type,
+		ec.fieldContext_Entry_type,
 		func(ctx context.Context) (any, error) {
 			return obj.Type, nil
 		},
@@ -345,9 +411,9 @@ func (ec *executionContext) _Content_type(ctx context.Context, field graphql.Col
 	)
 }
 
-func (ec *executionContext) fieldContext_Content_type(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Entry_type(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
-		Object:     "Content",
+		Object:     "Entry",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -358,12 +424,12 @@ func (ec *executionContext) fieldContext_Content_type(_ context.Context, field g
 	return fc, nil
 }
 
-func (ec *executionContext) _Content_title(ctx context.Context, field graphql.CollectedField, obj *model.Content) (ret graphql.Marshaler) {
+func (ec *executionContext) _Entry_title(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
 	return graphql.ResolveField(
 		ctx,
 		ec.OperationContext,
 		field,
-		ec.fieldContext_Content_title,
+		ec.fieldContext_Entry_title,
 		func(ctx context.Context) (any, error) {
 			return obj.Title, nil
 		},
@@ -374,9 +440,9 @@ func (ec *executionContext) _Content_title(ctx context.Context, field graphql.Co
 	)
 }
 
-func (ec *executionContext) fieldContext_Content_title(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Entry_title(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
-		Object:     "Content",
+		Object:     "Entry",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -387,12 +453,244 @@ func (ec *executionContext) fieldContext_Content_title(_ context.Context, field 
 	return fc, nil
 }
 
-func (ec *executionContext) _Content_metadata(ctx context.Context, field graphql.CollectedField, obj *model.Content) (ret graphql.Marshaler) {
+func (ec *executionContext) _Entry_slug(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
 	return graphql.ResolveField(
 		ctx,
 		ec.OperationContext,
 		field,
-		ec.fieldContext_Content_metadata,
+		ec.fieldContext_Entry_slug,
+		func(ctx context.Context) (any, error) {
+			return obj.Slug, nil
+		},
+		nil,
+		ec.marshalOString2ᚖstring,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_slug(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_description(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_description,
+		func(ctx context.Context) (any, error) {
+			return obj.Description, nil
+		},
+		nil,
+		ec.marshalOString2ᚖstring,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_description(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_url(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_url,
+		func(ctx context.Context) (any, error) {
+			return obj.URL, nil
+		},
+		nil,
+		ec.marshalOString2ᚖstring,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_url(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_image_urls(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_image_urls,
+		func(ctx context.Context) (any, error) {
+			return obj.ImageUrls, nil
+		},
+		nil,
+		ec.marshalOString2ᚕstringᚄ,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_image_urls(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_created(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_created,
+		func(ctx context.Context) (any, error) {
+			return obj.Created, nil
+		},
+		nil,
+		ec.marshalOString2ᚖstring,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_created(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_updated(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_updated,
+		func(ctx context.Context) (any, error) {
+			return obj.Updated, nil
+		},
+		nil,
+		ec.marshalOString2ᚖstring,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_updated(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_published(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_published,
+		func(ctx context.Context) (any, error) {
+			return obj.Published, nil
+		},
+		nil,
+		ec.marshalOString2ᚖstring,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_published(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_archived(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_archived,
+		func(ctx context.Context) (any, error) {
+			return obj.Archived, nil
+		},
+		nil,
+		ec.marshalOBoolean2ᚖbool,
+		true,
+		false,
+	)
+}
+
+func (ec *executionContext) fieldContext_Entry_archived(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Entry",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Entry_metadata(ctx context.Context, field graphql.CollectedField, obj *model.Entry) (ret graphql.Marshaler) {
+	return graphql.ResolveField(
+		ctx,
+		ec.OperationContext,
+		field,
+		ec.fieldContext_Entry_metadata,
 		func(ctx context.Context) (any, error) {
 			return obj.Metadata, nil
 		},
@@ -403,9 +701,9 @@ func (ec *executionContext) _Content_metadata(ctx context.Context, field graphql
 	)
 }
 
-func (ec *executionContext) fieldContext_Content_metadata(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Entry_metadata(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
-		Object:     "Content",
+		Object:     "Entry",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -416,24 +714,24 @@ func (ec *executionContext) fieldContext_Content_metadata(_ context.Context, fie
 	return fc, nil
 }
 
-func (ec *executionContext) _Query_contents(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+func (ec *executionContext) _Query_entries(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	return graphql.ResolveField(
 		ctx,
 		ec.OperationContext,
 		field,
-		ec.fieldContext_Query_contents,
+		ec.fieldContext_Query_entries,
 		func(ctx context.Context) (any, error) {
 			fc := graphql.GetFieldContext(ctx)
-			return ec.resolvers.Query().Contents(ctx, fc.Args["type"].(*string))
+			return ec.resolvers.Query().Entries(ctx, fc.Args["type"].(*string))
 		},
 		nil,
-		ec.marshalNContent2ᚕᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐContentᚄ,
+		ec.marshalNEntry2ᚕᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐEntryᚄ,
 		true,
 		true,
 	)
 }
 
-func (ec *executionContext) fieldContext_Query_contents(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Query_entries(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Query",
 		Field:      field,
@@ -442,15 +740,31 @@ func (ec *executionContext) fieldContext_Query_contents(ctx context.Context, fie
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "id":
-				return ec.fieldContext_Content_id(ctx, field)
+				return ec.fieldContext_Entry_id(ctx, field)
 			case "type":
-				return ec.fieldContext_Content_type(ctx, field)
+				return ec.fieldContext_Entry_type(ctx, field)
 			case "title":
-				return ec.fieldContext_Content_title(ctx, field)
+				return ec.fieldContext_Entry_title(ctx, field)
+			case "slug":
+				return ec.fieldContext_Entry_slug(ctx, field)
+			case "description":
+				return ec.fieldContext_Entry_description(ctx, field)
+			case "url":
+				return ec.fieldContext_Entry_url(ctx, field)
+			case "image_urls":
+				return ec.fieldContext_Entry_image_urls(ctx, field)
+			case "created":
+				return ec.fieldContext_Entry_created(ctx, field)
+			case "updated":
+				return ec.fieldContext_Entry_updated(ctx, field)
+			case "published":
+				return ec.fieldContext_Entry_published(ctx, field)
+			case "archived":
+				return ec.fieldContext_Entry_archived(ctx, field)
 			case "metadata":
-				return ec.fieldContext_Content_metadata(ctx, field)
+				return ec.fieldContext_Entry_metadata(ctx, field)
 			}
-			return nil, fmt.Errorf("no field named %q was found under type Content", field.Name)
+			return nil, fmt.Errorf("no field named %q was found under type Entry", field.Name)
 		},
 	}
 	defer func() {
@@ -460,7 +774,7 @@ func (ec *executionContext) fieldContext_Query_contents(ctx context.Context, fie
 		}
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
-	if fc.Args, err = ec.field_Query_contents_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+	if fc.Args, err = ec.field_Query_entries_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return fc, err
 	}
@@ -2029,34 +2343,50 @@ func (ec *executionContext) fieldContext___Type_isOneOf(_ context.Context, field
 
 // region    **************************** object.gotpl ****************************
 
-var contentImplementors = []string{"Content"}
+var entryImplementors = []string{"Entry"}
 
-func (ec *executionContext) _Content(ctx context.Context, sel ast.SelectionSet, obj *model.Content) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, contentImplementors)
+func (ec *executionContext) _Entry(ctx context.Context, sel ast.SelectionSet, obj *model.Entry) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, entryImplementors)
 
 	out := graphql.NewFieldSet(fields)
 	deferred := make(map[string]*graphql.FieldSet)
 	for i, field := range fields {
 		switch field.Name {
 		case "__typename":
-			out.Values[i] = graphql.MarshalString("Content")
+			out.Values[i] = graphql.MarshalString("Entry")
 		case "id":
-			out.Values[i] = ec._Content_id(ctx, field, obj)
+			out.Values[i] = ec._Entry_id(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
 		case "type":
-			out.Values[i] = ec._Content_type(ctx, field, obj)
+			out.Values[i] = ec._Entry_type(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
 		case "title":
-			out.Values[i] = ec._Content_title(ctx, field, obj)
+			out.Values[i] = ec._Entry_title(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "slug":
+			out.Values[i] = ec._Entry_slug(ctx, field, obj)
+		case "description":
+			out.Values[i] = ec._Entry_description(ctx, field, obj)
+		case "url":
+			out.Values[i] = ec._Entry_url(ctx, field, obj)
+		case "image_urls":
+			out.Values[i] = ec._Entry_image_urls(ctx, field, obj)
+		case "created":
+			out.Values[i] = ec._Entry_created(ctx, field, obj)
+		case "updated":
+			out.Values[i] = ec._Entry_updated(ctx, field, obj)
+		case "published":
+			out.Values[i] = ec._Entry_published(ctx, field, obj)
+		case "archived":
+			out.Values[i] = ec._Entry_archived(ctx, field, obj)
 		case "metadata":
-			out.Values[i] = ec._Content_metadata(ctx, field, obj)
+			out.Values[i] = ec._Entry_metadata(ctx, field, obj)
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -2099,7 +2429,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
-		case "contents":
+		case "entries":
 			field := field
 
 			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
@@ -2108,7 +2438,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_contents(ctx, field)
+				res = ec._Query_entries(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}
@@ -2503,7 +2833,7 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
-func (ec *executionContext) marshalNContent2ᚕᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐContentᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Content) graphql.Marshaler {
+func (ec *executionContext) marshalNEntry2ᚕᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐEntryᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.Entry) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2527,7 +2857,7 @@ func (ec *executionContext) marshalNContent2ᚕᚖgithubᚗcomᚋuz6rᚋapiᚋgr
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNContent2ᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐContent(ctx, sel, v[i])
+			ret[i] = ec.marshalNEntry2ᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐEntry(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2547,14 +2877,14 @@ func (ec *executionContext) marshalNContent2ᚕᚖgithubᚗcomᚋuz6rᚋapiᚋgr
 	return ret
 }
 
-func (ec *executionContext) marshalNContent2ᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐContent(ctx context.Context, sel ast.SelectionSet, v *model.Content) graphql.Marshaler {
+func (ec *executionContext) marshalNEntry2ᚖgithubᚗcomᚋuz6rᚋapiᚋgraphᚋmodelᚐEntry(ctx context.Context, sel ast.SelectionSet, v *model.Entry) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			graphql.AddErrorf(ctx, "the requested element is null which the schema does not allow")
 		}
 		return graphql.Null
 	}
-	return ec._Content(ctx, sel, v)
+	return ec._Entry(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNID2string(ctx context.Context, v any) (string, error) {
@@ -2888,6 +3218,42 @@ func (ec *executionContext) marshalOJSON2ᚖstring(ctx context.Context, sel ast.
 	_ = ctx
 	res := graphql.MarshalString(*v)
 	return res
+}
+
+func (ec *executionContext) unmarshalOString2ᚕstringᚄ(ctx context.Context, v any) ([]string, error) {
+	if v == nil {
+		return nil, nil
+	}
+	var vSlice []any
+	vSlice = graphql.CoerceList(v)
+	var err error
+	res := make([]string, len(vSlice))
+	for i := range vSlice {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
+		res[i], err = ec.unmarshalNString2string(ctx, vSlice[i])
+		if err != nil {
+			return nil, err
+		}
+	}
+	return res, nil
+}
+
+func (ec *executionContext) marshalOString2ᚕstringᚄ(ctx context.Context, sel ast.SelectionSet, v []string) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	ret := make(graphql.Array, len(v))
+	for i := range v {
+		ret[i] = ec.marshalNString2string(ctx, sel, v[i])
+	}
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
 }
 
 func (ec *executionContext) unmarshalOString2ᚖstring(ctx context.Context, v any) (*string, error) {
