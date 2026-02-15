@@ -35,13 +35,14 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
+            # Deploy from repo root so full monorepo is uploaded; Vercel Root Directory must be "apps/web".
             - name: Deploy to Vercel (preview / development)
               uses: amondnet/vercel-action@v25
               with:
                   vercel-token: ${{ secrets.VERCEL_TOKEN }}
                   vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
                   vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-                  working-directory: apps/web
+                  working-directory: .
                   github-comment: false
               env:
                   PATH: /usr/bin:/usr/local/bin:${{ github.workspace }}/node_modules/.bin:${{ env.PATH }}
