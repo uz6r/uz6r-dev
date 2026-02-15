@@ -1,3 +1,9 @@
 packages:
     - "apps/*"
     - "packages/*"
+
+# Allow these deps to run install scripts (Next/image sharp, esbuild, etc.).
+onlyBuiltDependencies:
+    - esbuild
+    - sharp
+    - unrs-resolver
