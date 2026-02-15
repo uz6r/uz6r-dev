@@ -53,7 +53,7 @@ function ToastList() {
                             // CSS variables for stacking calculations
                             "[--gap:0.8rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]",
                             // Base styles
-                            "bg-popover absolute right-0 bottom-0 left-auto z-[calc(1000-var(--toast-index))] mr-0 flex w-full origin-bottom items-center justify-between gap-1.5 rounded-lg border bg-clip-padding p-4 shadow-sm select-none",
+                            "bg-popover absolute right-0 bottom-0 left-auto z-[calc(1000-var(--toast-index))] mr-0 flex w-full origin-bottom items-center justify-between gap-1.5 rounded-lg border border-border bg-clip-padding p-4 shadow-lg select-none opacity-100",
                             // Height based on frontmost toast
                             "h-[var(--height)]",
                             // Transitions
@@ -72,15 +72,15 @@ function ToastList() {
                             "data-ending-style:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))] data-expanded:data-ending-style:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))]",
                             // Type-specific styles
                             toast.type === "success" &&
-                                "bg-success border-success-border text-success-foreground",
+                                "!bg-success border-success-border text-success-foreground opacity-100",
                             toast.type === "primary" &&
-                                "bg-primary border-primary text-primary-foreground",
+                                "!bg-primary border-primary text-primary-foreground opacity-100",
                             toast.type === "error" &&
-                                "bg-danger border-danger-border text-danger-foreground",
+                                "!bg-danger border-danger-border text-danger-foreground opacity-100",
                             toast.type === "info" &&
-                                "bg-info border-info-border text-info-foreground",
+                                "!bg-info border-info-border text-info-foreground opacity-100",
                             toast.type === "warning" &&
-                                "bg-warning border-warning-border text-warning-foreground"
+                                "!bg-warning border-warning-border text-warning-foreground opacity-100"
                         )}
                     >
                         <Toast.Content

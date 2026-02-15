@@ -1,5 +1,6 @@
 # Deploy web app to Vercel production after ci-web passes on main/master.
 # Required GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+# Optional: CONTACT_TO_EMAIL — synced to Vercel env before deploy so the contact form works.
 name: deploy-production
 
 on:
@@ -34,6 +35,17 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
+
+            - name: Sync CONTACT_TO_EMAIL to Vercel
+              env:
+                  CONTACT_EMAIL: ${{ secrets.CONTACT_TO_EMAIL }}
+              run: |
+                  if [ -z "$CONTACT_EMAIL" ]; then echo "CONTACT_TO_EMAIL secret not set, skipping."; exit 0; fi
+                  payload=$(jq -n --arg v "$CONTACT_EMAIL" '{key:"CONTACT_TO_EMAIL",value:$v,type:"plain",target:["production","preview"]}')
+                  curl -fsS -X POST "https://api.vercel.com/v10/projects/${{ secrets.VERCEL_PROJECT_ID }}/env?upsert=true" \
+                    -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+                    -H "Content-Type: application/json" \
+                    -d "$payload"
 
             # Deploy from repo root so full monorepo is uploaded; Vercel Root Directory must be "apps/web".
             - name: Deploy to Vercel (production)
