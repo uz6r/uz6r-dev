@@ -18,6 +18,11 @@ export const metadata: Metadata = {
         icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
         apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
     },
+    // themeColor keeps mobile browser chrome and status bar consistent with light/dark theme. avoids mismatched top bar.
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "oklch(0.98 0.002 0)" },
+        { media: "(prefers-color-scheme: dark)", color: "oklch(0.18 0.008 0)" },
+    ],
 };
 
 export default function RootLayout({
@@ -41,16 +46,36 @@ export default function RootLayout({
             `,
                     }}
                 />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+              (function() {
+                function setThemeColor() {
+                  var color = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+                  if (!color) return;
+                  document.querySelectorAll('meta[name="theme-color"]').forEach(function(meta) {
+                    meta.setAttribute('content', color);
+                    meta.removeAttribute('media');
+                  });
+                }
+                setThemeColor();
+                window.addEventListener('themechange', setThemeColor);
+              })();
+            `,
+                    }}
+                />
             </head>
-            <body className="root antialiased safe-area-insets">
-                <CommandPaletteProvider>
-                    <ToastProvider>
-                        {children}
-                        <Footer />
-                        <PageCommandPalette />
-                        <A2HSBanner />
-                    </ToastProvider>
-                </CommandPaletteProvider>
+            <body className="root antialiased safe-area-insets bg-background text-foreground">
+                <div className="bg-background min-h-screen">
+                    <CommandPaletteProvider>
+                        <ToastProvider>
+                            {children}
+                            <Footer />
+                            <PageCommandPalette />
+                            <A2HSBanner />
+                        </ToastProvider>
+                    </CommandPaletteProvider>
+                </div>
             </body>
         </html>
     );
