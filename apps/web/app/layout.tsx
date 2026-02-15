@@ -11,7 +11,12 @@ import "./globals.css";
 // Focus is on backend systems, workflows, and server-side architecture,
 // not generic frontend portfolio phrasing.
 export const metadata: Metadata = {
-    title: "Uzair Zahari",
+    // template automatically prefixes page titles.
+    // keeps metadata consistent across routes.
+    title: {
+        default: "Uzair Zahari",
+        template: "%s | Uzair Zahari",
+    },
     description:
         "Backend-focused software engineer: APIs, services, and server-side systems. Portfolio of production systems, workflows, and architecture work.",
     manifest: "/manifest.json",

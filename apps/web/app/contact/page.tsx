@@ -3,6 +3,10 @@ import { Section } from "@/components/layout/section";
 import { Navbar } from "@/components/navbar";
 import { ContactForm } from "@/components/contact-form";
 
+export const metadata = {
+    title: "Contact",
+};
+
 // Contact form intentionally lightweight.
 // Designed to migrate later to backend or graphql without UI changes.
 // Resend: first-class Next.js/Vercel support, recipient email stays server-side.

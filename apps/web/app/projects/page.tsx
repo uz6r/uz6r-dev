@@ -4,6 +4,10 @@ import { ProjectsGrid } from "@/components/sections/projects-grid";
 import { Navbar } from "@/components/navbar";
 import { entries } from "@/data/entries";
 
+export const metadata = {
+    title: "Projects",
+};
+
 export default function ProjectsPage() {
     return (
         <>

@@ -6,6 +6,10 @@ import { Section } from "@/components/layout/section";
 import { Navbar } from "@/components/navbar";
 import { aboutData } from "@/data/about";
 
+export const metadata = {
+    title: "About",
+};
+
 export default function AboutPage() {
     return (
         <>
