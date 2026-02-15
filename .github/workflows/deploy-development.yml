@@ -44,4 +44,4 @@ jobs:
                   working-directory: apps/web
                   github-comment: false
               env:
-                  PATH: ${{ github.workspace }}/node_modules/.bin:${{ env.PATH }}
+                  PATH: /usr/bin:/usr/local/bin:${{ github.workspace }}/node_modules/.bin:${{ env.PATH }}
