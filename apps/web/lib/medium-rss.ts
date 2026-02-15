@@ -1,4 +1,5 @@
 import Parser from "rss-parser";
+import { fmtLocalDt } from "@/lib/date";
 
 const MEDIUM_FEED_URL = "https://medium.com/feed/@uz6r";
 
@@ -15,12 +16,6 @@ const parser = new Parser({
         item: [["content:encoded", "contentEncoded"]],
     },
 });
-
-function formatDate(isoOrRfc: string): string {
-    const d = new Date(isoOrRfc);
-    if (Number.isNaN(d.getTime())) return "";
-    return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
-}
 
 function stripHtml(html: string, maxLength: number): string {
     const text = html
@@ -61,7 +56,7 @@ export async function getMediumPosts(limit = 10): Promise<MediumPost[]> {
             return {
                 title: item.title ?? "",
                 link: item.link ?? "",
-                pubDate: formatDate(item.pubDate ?? item.isoDate ?? ""),
+                pubDate: fmtLocalDt(item.pubDate ?? item.isoDate ?? ""),
                 snippet: stripHtml(snippetSource, 160),
                 imageUrl: firstImageUrl(rawContent),
             };
