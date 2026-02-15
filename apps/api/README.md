@@ -110,6 +110,15 @@ After modifying the schema:
 
 Entry data is loaded from `data/entries.json` by the `entries` query. Each entry has first-class fields: `id`, `type`, `title`, `slug`, `description`, `created`, `published`, `archived`, and optional `metadata` (JSON) for type-specific data (e.g. tech stack, URLs). Use the `type` argument to filter (e.g. `entries(type: "project")`).
 
+## Deployment (fly.io)
+
+From `apps/api` (where `Dockerfile` and `fly.toml` live):
+
+- **First time:** `fly launch` (creates app if needed; use existing `fly.toml` to skip prompts).
+- **Deploy:** `fly deploy`.
+
+Keep instructions concise; see [fly.io docs](https://fly.io/docs/) for more.
+
 ## Dependencies
 
 - [gqlgen](https://gqlgen.com/) - GraphQL server library

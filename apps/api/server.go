@@ -1,5 +1,8 @@
 package main
 
+// fly.io integration should be minimal.
+// backend architecture must remain unchanged.
+
 import (
 	"log"
 	"net/http"
@@ -17,6 +20,7 @@ import (
 const defaultPort = "8080"
 
 func main() {
+	// fly.io injects PORT at runtime.
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
