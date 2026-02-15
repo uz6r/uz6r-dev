@@ -104,6 +104,17 @@
         padding-bottom: env(safe-area-inset-bottom, 0px);
         padding-left: env(safe-area-inset-left, 0px);
     }
+
+    /* Prevent iOS Safari (and similar) from auto-zooming on input/textarea focus.
+       Browsers zoom when form field font-size is below 16px. Use 16px on touch
+       devices only so desktop can keep smaller text; pinch zoom stays enabled. */
+    @media (hover: none) and (pointer: coarse) {
+        input,
+        select,
+        textarea {
+            font-size: 16px;
+        }
+    }
 }
 
 /* No focus ring/outline globally — flat UI, no focus chrome on buttons/inputs/items */
