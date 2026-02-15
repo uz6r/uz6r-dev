@@ -19,9 +19,9 @@ if (!self.define) {
         const a = e || ("document" in self ? document.currentScript.src : "") || location.href;
         if (s[a]) return;
         let i = {};
-        const r = (e) => n(e, a),
-            d = { module: { uri: a }, exports: i, require: r };
-        s[a] = Promise.all(t.map((e) => d[e] || r(e))).then((e) => (c(...e), i));
+        const d = (e) => n(e, a),
+            r = { module: { uri: a }, exports: i, require: d };
+        s[a] = Promise.all(t.map((e) => r[e] || d(e))).then((e) => (c(...e), i));
     };
 }
 define(["./workbox-5194662c"], function (e) {
@@ -32,11 +32,11 @@ define(["./workbox-5194662c"], function (e) {
         e.precacheAndRoute(
             [
                 {
-                    url: "/_next/static/c6bpcxbHCLe8gRSTT_JcX/_buildManifest.js",
+                    url: "/_next/static/NQFDERuEuZTYjRVW6I27o/_buildManifest.js",
                     revision: "f42a10df35b32cd449eaab5ff1a92f07",
                 },
                 {
-                    url: "/_next/static/c6bpcxbHCLe8gRSTT_JcX/_ssgManifest.js",
+                    url: "/_next/static/NQFDERuEuZTYjRVW6I27o/_ssgManifest.js",
                     revision: "b6652df95db52feb4daf4eca35380933",
                 },
                 {
@@ -44,20 +44,28 @@ define(["./workbox-5194662c"], function (e) {
                     revision: "a74bbdd5de03c7a7",
                 },
                 {
-                    url: "/_next/static/chunks/381-be30c5d9c87bf1d0.js",
-                    revision: "be30c5d9c87bf1d0",
-                },
-                {
                     url: "/_next/static/chunks/498-4ddfee62544b7197.js",
                     revision: "4ddfee62544b7197",
+                },
+                {
+                    url: "/_next/static/chunks/522-4071d6630d0f101a.js",
+                    revision: "4071d6630d0f101a",
+                },
+                {
+                    url: "/_next/static/chunks/574-ae67b927ac5360fb.js",
+                    revision: "ae67b927ac5360fb",
                 },
                 {
                     url: "/_next/static/chunks/784-7067361c6af894fb.js",
                     revision: "7067361c6af894fb",
                 },
                 {
-                    url: "/_next/static/chunks/910-558c5c61342ee9a8.js",
-                    revision: "558c5c61342ee9a8",
+                    url: "/_next/static/chunks/855-43bccdc32bc610f3.js",
+                    revision: "43bccdc32bc610f3",
+                },
+                {
+                    url: "/_next/static/chunks/910-f1a503bc8dd2d6fe.js",
+                    revision: "f1a503bc8dd2d6fe",
                 },
                 {
                     url: "/_next/static/chunks/933-f0b38c538acc8013.js",
@@ -72,24 +80,24 @@ define(["./workbox-5194662c"], function (e) {
                     revision: "efde8c98790fc32d",
                 },
                 {
-                    url: "/_next/static/chunks/app/about/page-09d2ddefcb8264e1.js",
-                    revision: "09d2ddefcb8264e1",
+                    url: "/_next/static/chunks/app/about/page-ecc06c3d0d53ce7a.js",
+                    revision: "ecc06c3d0d53ce7a",
                 },
                 {
-                    url: "/_next/static/chunks/app/blog/page-09d2ddefcb8264e1.js",
-                    revision: "09d2ddefcb8264e1",
+                    url: "/_next/static/chunks/app/blog/page-ecc06c3d0d53ce7a.js",
+                    revision: "ecc06c3d0d53ce7a",
                 },
                 {
-                    url: "/_next/static/chunks/app/contact/page-277b15e009c1c1a6.js",
-                    revision: "277b15e009c1c1a6",
+                    url: "/_next/static/chunks/app/contact/page-d959d190ac588106.js",
+                    revision: "d959d190ac588106",
                 },
                 {
-                    url: "/_next/static/chunks/app/layout-47ee2604b968dfc9.js",
-                    revision: "47ee2604b968dfc9",
+                    url: "/_next/static/chunks/app/layout-63b4dcf3354a60dc.js",
+                    revision: "63b4dcf3354a60dc",
                 },
                 {
-                    url: "/_next/static/chunks/app/page-a2a85668f4e81f99.js",
-                    revision: "a2a85668f4e81f99",
+                    url: "/_next/static/chunks/app/page-4f696a993862607d.js",
+                    revision: "4f696a993862607d",
                 },
                 {
                     url: "/_next/static/chunks/app/projects/page-439fd84cdbd2e775.js",
@@ -139,9 +147,10 @@ define(["./workbox-5194662c"], function (e) {
                     url: "/_next/static/chunks/webpack-dc4ae4ed5bd3fdea.js",
                     revision: "dc4ae4ed5bd3fdea",
                 },
-                { url: "/_next/static/css/a2334a0306d66fc1.css", revision: "a2334a0306d66fc1" },
+                { url: "/_next/static/css/9ad8b954a49032c3.css", revision: "9ad8b954a49032c3" },
                 { url: "/icon.svg", revision: "3108d76bd3524cc46c3f4b80196a790b" },
                 { url: "/manifest.json", revision: "7cc8d69497dc6b392a40d2229f373417" },
+                { url: "/theme-init.js", revision: "9f704a68a6b71035811176961f776abc" },
             ],
             { ignoreURLParametersMatching: [/^utm_/, /^fbclid$/] }
         ),

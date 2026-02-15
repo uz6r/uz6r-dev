@@ -11,6 +11,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 const nextConfig: NextConfig = {
     transpilePackages: ["@repo/ui"],
     outputFileTracingRoot: path.join(process.cwd(), "../.."),
+    devIndicators: false,
 };
 
 export default withPWA(nextConfig);
