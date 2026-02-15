@@ -14,6 +14,7 @@ const TOAST_ICONS: {
 } = {
     loading: <Loader className="animate-spin" />,
     success: <CircleCheck />,
+    primary: <CircleCheck />,
     error: <CircleAlert />,
     info: <Info />,
     warning: <TriangleAlert />,
@@ -67,6 +68,8 @@ function ToastList() {
                             // Type-specific styles
                             toast.type === "success" &&
                                 "bg-success border-success-border text-success-foreground",
+                            toast.type === "primary" &&
+                                "bg-primary border-primary text-primary-foreground",
                             toast.type === "error" &&
                                 "bg-danger border-danger-border text-danger-foreground",
                             toast.type === "info" &&

@@ -1,18 +1,20 @@
 "use server";
 
 import { Resend } from "resend";
-import { redirect } from "next/navigation";
 
 // Contact form intentionally lightweight.
-// Designed to migrate later to backend or graphql without UI changes.
-// Resend: first-class Next.js/Vercel support, keeps recipient email server-side.
+// Resend errors are passed through with statusCode so the client can show real HTTP handling.
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export type SubmitState = { ok: true } | { ok: false; error: string };
+export type SubmitState = { ok: true } | { ok: false; error: string; statusCode?: number | null };
+
+function err(message: string, statusCode?: number | null): Extract<SubmitState, { ok: false }> {
+    return { ok: false, error: message, statusCode: statusCode ?? null };
+}
 
 export async function submitContactForm(
-    prevState: SubmitState | null,
+    _prevState: SubmitState | null,
     formData: FormData
 ): Promise<SubmitState> {
     const name = (formData.get("name") as string)?.trim();
@@ -20,7 +22,7 @@ export async function submitContactForm(
     const message = (formData.get("message") as string)?.trim();
 
     if (!name || !email || !message) {
-        return { ok: false, error: "Name, email, and message are required." };
+        return err("Name, email, and message are required.", 400);
     }
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -28,27 +30,36 @@ export async function submitContactForm(
     const to = process.env.CONTACT_TO_EMAIL;
 
     if (!apiKey || !from || !to) {
-        return {
-            ok: false,
-            error: "Contact form is not configured. Missing RESEND_API_KEY, RESEND_FROM, or CONTACT_TO_EMAIL.",
-        };
+        return err(
+            "Contact form is not configured. Missing RESEND_API_KEY, RESEND_FROM, or CONTACT_TO_EMAIL.",
+            503
+        );
     }
 
-    const { data, error } = await resend.emails.send({
-        from,
-        to,
-        replyTo: email,
-        subject: `Portfolio contact from ${name}`,
-        text: `From: ${name} <${email}>\n\n${message}`,
-    });
+    try {
+        const { data, error } = await resend.emails.send({
+            from,
+            to,
+            replyTo: email,
+            subject: `Portfolio contact from ${name}`,
+            text: `From: ${name} <${email}>\n\n${message}`,
+        });
 
-    if (error) {
-        return { ok: false, error: error.message };
+        if (error) {
+            const code =
+                "statusCode" in error && typeof error.statusCode === "number"
+                    ? error.statusCode
+                    : null;
+            return err(error.message ?? "Failed to send.", code);
+        }
+
+        if (!data?.id) {
+            return err("Failed to send.", 502);
+        }
+
+        return { ok: true };
+    } catch (e) {
+        const message = e instanceof Error ? e.message : "Failed to send.";
+        return err(message, null);
     }
-
-    if (!data?.id) {
-        return { ok: false, error: "Failed to send." };
-    }
-
-    redirect("/contact?sent=1");
 }

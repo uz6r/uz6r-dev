@@ -37,15 +37,17 @@ export default function RootLayout({
                 {/* External script: same output on server and client, no dangerouslySetInnerHTML hydration mismatch. */}
                 <Script src="/theme-init.js" strategy="beforeInteractive" />
             </head>
-            {/* suppressHydrationWarning: ignores attributes added by browser extensions (e.g. bis_use). */}
+            {/* suppressHydrationWarning: ignores attributes added by browser extensions (e.g. bis_skin_checked). */}
             <body
                 className="root antialiased safe-area-insets bg-background text-foreground"
                 suppressHydrationWarning
             >
-                <div className="bg-background flex min-h-dvh flex-col">
+                <div className="bg-background flex min-h-dvh flex-col" suppressHydrationWarning>
                     <CommandPaletteProvider>
                         <ToastProvider>
-                            <div className="min-h-0 flex-1">{children}</div>
+                            <div className="min-h-0 flex-1" suppressHydrationWarning>
+                                {children}
+                            </div>
                             <Footer />
                             <PageCommandPalette />
                             <A2HSBanner />

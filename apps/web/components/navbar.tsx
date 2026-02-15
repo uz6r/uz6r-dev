@@ -42,7 +42,8 @@ export function Navbar() {
                             {label}
                         </Link>
                     ))}
-                    <div className="flex-1" />
+                    {/* Spacer; suppressHydrationWarning: browser extensions (e.g. Bitwarden) can inject attributes here. */}
+                    <div className="flex-1" suppressHydrationWarning />
                     <CommandPaletteTrigger />
                 </nav>
 

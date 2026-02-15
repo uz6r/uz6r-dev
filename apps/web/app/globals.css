@@ -118,3 +118,16 @@
     border: none;
     border-radius: 0;
 }
+
+/* Toast entrance: fade in */
+@keyframes toast-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+[data-slot="toast"] {
+    animation: toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
