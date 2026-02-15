@@ -18,6 +18,7 @@
         "tailwind-merge": "^2.6.0"
     },
     "devDependencies": {
+        "vercel": "^39.0.0",
         "@eslint/eslintrc": "^3.2.0",
         "@repo/config-typescript": "workspace:*",
         "@types/node": "^22.0.0",

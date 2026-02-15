@@ -44,3 +44,5 @@ jobs:
                   vercel-args: --prod
                   working-directory: apps/web
                   github-comment: false
+              env:
+                  PATH: ${{ github.workspace }}/node_modules/.bin:${{ env.PATH }}
