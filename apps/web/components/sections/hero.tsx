@@ -1,13 +1,15 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { RotatingRoles } from "@/components/rotating-roles";
 
 interface HeroProps {
     title: string;
-    headline: string;
     bio: string;
 }
 
-export function Hero({ title, headline, bio }: HeroProps) {
+export function Hero({ title, bio }: HeroProps) {
     return (
         <Section className="border-b">
             <Container>
@@ -23,7 +25,7 @@ export function Hero({ title, headline, bio }: HeroProps) {
                         className="animate-fade-in-up text-muted-foreground text-lg opacity-0"
                         style={{ animationDelay: "200ms" }}
                     >
-                        {headline}
+                        I am a <RotatingRoles />
                     </p>
                     <p
                         className="animate-fade-in-up text-muted-foreground mt-2 max-w-xl text-sm leading-relaxed opacity-0"

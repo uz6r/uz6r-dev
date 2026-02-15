@@ -28,7 +28,10 @@ export function Experience({ items, title = "Experience" }: ExperienceProps) {
                             style={{ animationDelay: `${180 + i * 70}ms` }}
                         >
                             <AccordionTrigger className="py-4 hover:no-underline">
-                                <div className="flex flex-col items-start gap-1 text-left">
+                                <div
+                                    className="flex flex-col items-start gap-1 text-left"
+                                    suppressHydrationWarning
+                                >
                                     <span className="font-medium">{item.role}</span>
                                     <span className="text-muted-foreground text-sm">
                                         {item.company} · {item.period}

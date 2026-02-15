@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpen, FolderOpen, Home, User } from "lucide-react";
+import { BookOpen, FolderOpen, Home, Mail, User } from "lucide-react";
 import {
     CommandDialog,
     CommandInput,
@@ -18,6 +18,7 @@ const PAGE_LINKS = [
     { href: "/projects", label: "Projects", icon: FolderOpen },
     { href: "/blog", label: "Blog", icon: BookOpen },
     { href: "/about", label: "About", icon: User },
+    { href: "/contact", label: "Contact", icon: Mail },
 ] as const;
 
 export function PageCommandPalette() {

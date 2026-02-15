@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { Badge } from "@repo/ui/badge";
 import { Container } from "@/components/layout/container";
@@ -20,34 +21,41 @@ export default function AboutPage() {
                                 <p className="text-muted-foreground text-sm leading-relaxed">
                                     {aboutData.intro}
                                 </p>
-                                {aboutData.role && (
+                                <p className="text-muted-foreground text-sm leading-relaxed">
+                                    {aboutData.role}
+                                </p>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {aboutData.stack.map((tech) => (
+                                        <Badge
+                                            key={tech}
+                                            variant="secondary"
+                                            className="text-xs font-normal"
+                                        >
+                                            {tech}
+                                        </Badge>
+                                    ))}
+                                </div>
+                                <div className="space-y-2 pt-2">
+                                    <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
+                                        Personal
+                                    </span>
                                     <p className="text-muted-foreground text-sm leading-relaxed">
-                                        {aboutData.role}
+                                        {aboutData.personal.athletics}{" "}
+                                        {aboutData.personal.interests}
                                     </p>
-                                )}
-                                {aboutData.stack.length > 0 && (
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {aboutData.stack.map((tech) => (
-                                            <Badge
-                                                key={tech}
-                                                variant="secondary"
-                                                className="text-xs font-normal"
-                                            >
-                                                {tech}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                )}
-                                {aboutData.interests?.length ? (
-                                    <div className="pt-2">
-                                        <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
-                                            Interests
-                                        </span>
-                                        <p className="text-muted-foreground mt-1 text-sm">
-                                            {aboutData.interests.join(", ")}.
-                                        </p>
-                                    </div>
-                                ) : null}
+                                </div>
+                                <p className="text-muted-foreground text-sm leading-relaxed">
+                                    {aboutData.philosophy}
+                                </p>
+                                {/* Internal link encourages conversation while keeping navigation within the portfolio. */}
+                                <p className="text-muted-foreground pt-2 text-sm leading-relaxed">
+                                    <Link
+                                        href="/contact"
+                                        className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-colors hover:decoration-foreground"
+                                    >
+                                        I&apos;m always happy to talk.
+                                    </Link>
+                                </p>
                             </CardContent>
                         </Card>
                     </Container>

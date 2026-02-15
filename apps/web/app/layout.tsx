@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { CommandPaletteProvider } from "@/components/command-palette-context";
 import { ToastProvider } from "@/components/ui/toast";
 import { Footer } from "@/components/layout/footer";
@@ -33,39 +34,14 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-              (function() {
-                const v = localStorage.getItem('theme');
-                const m = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const dark = v === 'dark' || (!v && m);
-                if (dark) document.documentElement.classList.add('dark');
-                else document.documentElement.classList.remove('dark');
-              })();
-            `,
-                    }}
-                />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-              (function() {
-                function setThemeColor() {
-                  var color = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
-                  if (!color) return;
-                  document.querySelectorAll('meta[name="theme-color"]').forEach(function(meta) {
-                    meta.setAttribute('content', color);
-                    meta.removeAttribute('media');
-                  });
-                }
-                setThemeColor();
-                window.addEventListener('themechange', setThemeColor);
-              })();
-            `,
-                    }}
-                />
+                {/* External script: same output on server and client, no dangerouslySetInnerHTML hydration mismatch. */}
+                <Script src="/theme-init.js" strategy="beforeInteractive" />
             </head>
-            <body className="root antialiased safe-area-insets bg-background text-foreground">
+            {/* suppressHydrationWarning: ignores attributes added by browser extensions (e.g. bis_use). */}
+            <body
+                className="root antialiased safe-area-insets bg-background text-foreground"
+                suppressHydrationWarning
+            >
                 <div className="bg-background flex min-h-dvh flex-col">
                     <CommandPaletteProvider>
                         <ToastProvider>
