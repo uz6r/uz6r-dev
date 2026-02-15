@@ -12,7 +12,8 @@ const DESKTOP_BREAKPOINT = "(min-width: 768px)";
 function getCookie(name: string): string | null {
     if (typeof document === "undefined") return null;
     const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-    return match ? decodeURIComponent(match[1]) : null;
+    const value = match?.[1];
+    return value != null ? decodeURIComponent(value) : null;
 }
 
 function setCookie(name: string, value: string) {
