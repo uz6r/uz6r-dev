@@ -25,7 +25,17 @@ app/
 ├── api/           # Route Handlers (optional)
 ├── globals.css    # Tailwind + 9ui base (run @9ui/init to add)
 ├── layout.tsx     # Root layout (ToastProvider, root class for 9ui)
-└── page.tsx       # Home
+├── page.tsx       # Home
+├── about/
+│   └── page.tsx
+├── blog/
+│   └── page.tsx
+├── contact/
+│   ├── actions.ts
+│   ├── page.tsx
+│   └── schema.ts
+└── projects/
+    └── page.tsx
 components/
 └── ui/            # Re-exports from @repo/ui (e.g. toast for @/ path)
 ```

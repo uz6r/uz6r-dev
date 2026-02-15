@@ -77,3 +77,7 @@ Copy `.env.example` to `.env.local` and fill in values. Vercel injects its own e
 4. Ignored Build Step: `npx turbo-ignore --fallback=HEAD^1`
 
 Remote caching: `pnpm dlx turbo login` then `pnpm dlx turbo link`
+
+## Notes
+
+- apps/web continues to evolve independently while backend deployment strategy is being evaluated; the Go GraphQL API in `apps/api` is in place for future integration.
