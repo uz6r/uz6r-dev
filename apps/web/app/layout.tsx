@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CommandPaletteProvider } from "@/components/command-palette-context";
 import { ToastProvider } from "@/components/ui/toast";
 import { Footer } from "@/components/layout/footer";
+import { A2HSBanner } from "@/components/a2hs-banner";
 import { PageCommandPalette } from "@/components/page-command-palette";
 import "./globals.css";
 
@@ -47,6 +48,7 @@ export default function RootLayout({
                         {children}
                         <Footer />
                         <PageCommandPalette />
+                        <A2HSBanner />
                     </ToastProvider>
                 </CommandPaletteProvider>
             </body>

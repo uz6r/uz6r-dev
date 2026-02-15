@@ -61,7 +61,7 @@ export function ResponsiveOverlay({ trigger, title, children }: ResponsiveOverla
                         <DialogHeader>
                             <DialogTitle>{title}</DialogTitle>
                         </DialogHeader>
-                        {children}
+                        <div className="min-w-0">{children}</div>
                     </DialogContent>
                 </Dialog>
             </>
@@ -73,12 +73,12 @@ export function ResponsiveOverlay({ trigger, title, children }: ResponsiveOverla
             {triggerWrapper}
             <Drawer open={open} onOpenChange={setOpen} direction="bottom">
                 <DrawerContent className="shadow-sm">
-                    <div className="mx-auto w-full max-w-lg">
-                        <DrawerHeader>
+                    <div className="mx-auto w-full max-w-lg p-8">
+                        <DrawerHeader className="p-0">
                             <DrawerTitle>{title}</DrawerTitle>
                         </DrawerHeader>
-                        {children}
-                        <div className="flex justify-end p-4 pt-0">
+                        <div className="min-w-0 pt-4">{children}</div>
+                        <div className="flex justify-end pt-6">
                             <DrawerClose className="rounded-md border border-input bg-background px-4 py-2 text-sm font-medium hover:bg-accent">
                                 Close
                             </DrawerClose>

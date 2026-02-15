@@ -15,7 +15,7 @@ export default async function HomePage() {
         <>
             <Navbar />
             <main>
-                <Hero name={heroData.name} headline={heroData.headline} bio={heroData.bio} />
+                <Hero title={heroData.title} headline={heroData.headline} bio={heroData.bio} />
                 <ProjectsGrid entries={entries} />
                 <Experience items={experience} />
                 <BlogSection

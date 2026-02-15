@@ -27,7 +27,7 @@ function DialogOverlay({ className, ...props }: React.ComponentProps<typeof Base
         <BaseDialog.Backdrop
             data-slot="dialog-overlay"
             className={cn(
-                "fixed inset-0 bg-black/50 transition-all duration-200 [&[data-ending-style]]:opacity-0 [&[data-starting-style]]:opacity-0",
+                "fixed inset-0 bg-black/50 transition-opacity duration-300 ease-out [&[data-ending-style]]:opacity-0 [&[data-starting-style]]:opacity-0",
                 className
             )}
             {...props}
@@ -49,7 +49,10 @@ function DialogContent({
             <BaseDialog.Popup
                 data-slot="dialog-content"
                 className={cn(
-                    "bg-popover text-popover-foreground fixed top-[100vh] left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-full gap-4 rounded-lg border p-6 shadow-sm transition-all duration-200 outline-none data-ending-style:translate-y-full data-ending-style:opacity-0 data-starting-style:translate-y-full data-starting-style:opacity-0 max-sm:rounded-b-none sm:top-[50%] sm:w-[32rem] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:scale-[calc(1-0.1*var(--nested-dialogs))] data-ending-style:sm:translate-y-[-50%] data-ending-style:sm:scale-95 data-starting-style:sm:translate-y-[-50%] data-starting-style:sm:scale-95",
+                    "bg-popover text-popover-foreground fixed top-[100vh] left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-full gap-4 rounded-lg border p-8 shadow-sm outline-none max-sm:rounded-b-none sm:top-[50%] sm:w-[32rem] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:scale-[calc(1-0.1*var(--nested-dialogs))]",
+                    "transition-[transform,opacity] duration-300 ease-out",
+                    "data-ending-style:translate-y-full data-ending-style:opacity-0 data-starting-style:translate-y-full data-starting-style:opacity-0",
+                    "data-ending-style:sm:translate-y-[-50%] data-ending-style:sm:scale-95 data-ending-style:sm:opacity-0 data-starting-style:sm:translate-y-[-50%] data-starting-style:sm:scale-95 data-starting-style:sm:opacity-0",
                     className
                 )}
                 {...props}

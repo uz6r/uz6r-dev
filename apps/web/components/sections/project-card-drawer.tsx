@@ -60,7 +60,7 @@ export function ProjectCardDrawer({ entry }: ProjectCardDrawerProps) {
             }
             title={entry.title}
         >
-            <div className="px-1">
+            <div>
                 {entry.published && (
                     <p className="text-muted-foreground mb-3 text-xs">{entry.published}</p>
                 )}
