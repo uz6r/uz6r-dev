@@ -66,10 +66,10 @@ export default function RootLayout({
                 />
             </head>
             <body className="root antialiased safe-area-insets bg-background text-foreground">
-                <div className="bg-background min-h-screen">
+                <div className="bg-background flex min-h-dvh flex-col">
                     <CommandPaletteProvider>
                         <ToastProvider>
-                            {children}
+                            <div className="min-h-0 flex-1">{children}</div>
                             <Footer />
                             <PageCommandPalette />
                             <A2HSBanner />
