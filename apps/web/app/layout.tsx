@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { CommandPaletteProvider } from "@/components/command-palette-context";
 import { ToastProvider } from "@/components/ui/toast";
 import { Footer } from "@/components/layout/footer";
+import { PageCommandPalette } from "@/components/page-command-palette";
 import "./globals.css";
 
 // Metadata is written for technical positioning.
@@ -35,10 +37,13 @@ export default function RootLayout({
                 />
             </head>
             <body className="root antialiased safe-area-insets">
-                <ToastProvider>
-                    {children}
-                    <Footer />
-                </ToastProvider>
+                <CommandPaletteProvider>
+                    <ToastProvider>
+                        {children}
+                        <Footer />
+                        <PageCommandPalette />
+                    </ToastProvider>
+                </CommandPaletteProvider>
             </body>
         </html>
     );
