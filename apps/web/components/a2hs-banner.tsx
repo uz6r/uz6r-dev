@@ -1,13 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@repo/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@repo/ui/drawer";
+import { useToast } from "@/components/ui/toast";
+import { useActiveTimer } from "@/lib/useActiveTimer";
 
 const COOKIE_NAME = "a2hs";
 const MAX_NOT_NOW = 7;
 const COOKIE_MAX_AGE_DAYS = 365;
 const DESKTOP_BREAKPOINT = "(min-width: 768px)";
+const A2HS_TOAST_ACTIVE_SECONDS = 120;
 
 function getCookie(name: string): string | null {
     if (typeof document === "undefined") return null;
@@ -114,6 +117,9 @@ export function A2HSBanner() {
     const [visible, setVisible] = useState(false);
     const [isIOS, setIsIOS] = useState(false);
     const isDesktop = useIsDesktop();
+    const activeSeconds = useActiveTimer();
+    const { add } = useToast();
+    const toastShownRef = useRef(false);
 
     useEffect(() => {
         if (!shouldShowBanner()) return;
@@ -122,6 +128,22 @@ export function A2HSBanner() {
             setVisible(true);
         });
     }, []);
+
+    useEffect(() => {
+        if (
+            toastShownRef.current ||
+            activeSeconds < A2HS_TOAST_ACTIVE_SECONDS ||
+            !shouldShowBanner()
+        ) {
+            return;
+        }
+        toastShownRef.current = true;
+        add({
+            title: "Add to Home Screen",
+            description: "Install this app for quick access from your home screen.",
+            type: "info",
+        });
+    }, [activeSeconds, add]);
 
     const handleNotNow = () => {
         const val = getCookie(COOKIE_NAME);
