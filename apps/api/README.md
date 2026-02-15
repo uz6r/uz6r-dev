@@ -56,7 +56,7 @@ go run github.com/99designs/gqlgen generate
 ### Run the Server
 
 ```bash
-# From monorepo root (runs API + web in parallel)
+# From repo root (runs API + web in parallel)
 pnpm dev
 
 # Using Make (recommended)

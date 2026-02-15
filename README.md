@@ -1,13 +1,13 @@
-# Uzair — Monorepo
+# uz6r
 
 [![ci-api](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml)
 [![ci-web](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-10.29.3-F69220?logo=pnpm)](https://pnpm.io/)
 
-This is my personal portfolio repo. Feel free to dive in to see how it operates.
+Portfolio repo. Feel free to dive in to see how it operates.
 
-Turborepo monorepo with Next.js (SSR), 9ui components, and Vercel deployment.
+Turborepo with Next.js (SSR), 9ui components, and Vercel deployment.
 
 ## Structure
 
@@ -73,7 +73,7 @@ Copy `.env.example` to `.env.local` and fill in values. Vercel injects its own e
 
 1. Import repo → Create Project
 2. **Root Directory**: `apps/web`
-3. Build: `turbo build` (or `cd ../.. && pnpm turbo run build --filter=web`)
+3. Build: from repo root use `cd .. && pnpm install` and `cd .. && pnpm turbo run build --filter=web` (see `apps/web/vercel.json`).
 4. Ignored Build Step: `npx turbo-ignore --fallback=HEAD^1`
 
 Remote caching: `pnpm dlx turbo login` then `pnpm dlx turbo link`
