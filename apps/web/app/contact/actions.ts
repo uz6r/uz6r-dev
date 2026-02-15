@@ -29,34 +29,49 @@ export async function submitContactForm(
     const from = process.env.RESEND_FROM;
     const to = process.env.CONTACT_TO_EMAIL;
 
-    if (!apiKey || !from || !to) {
-        return err(
-            "Contact form is not configured. Missing RESEND_API_KEY, RESEND_FROM, or CONTACT_TO_EMAIL.",
-            503
-        );
+    if (!to) {
+        return err("Contact form is not configured. Missing CONTACT_TO_EMAIL.", 503);
     }
 
+    // temporarily disabled resend submission.
+    // using formsubmit.co until a custom domain is configured and verified.
+    // try {
+    //     const { data, error } = await resend.emails.send({
+    //         from,
+    //         to,
+    //         replyTo: email,
+    //         subject: `Portfolio contact from ${name}`,
+    //         text: `From: ${name} <${email}>\n\n${message}`,
+    //     });
+    //
+    //     if (error) {
+    //         const code =
+    //             "statusCode" in error && typeof error.statusCode === "number"
+    //                 ? error.statusCode
+    //                 : null;
+    //         return err(error.message ?? "Failed to send.", code);
+    //     }
+    //
+    //     if (!data?.id) {
+    //         return err("Failed to send.", 502);
+    //     }
+    //
+    //     return { ok: true };
+    // } catch (e) {
+    //     const message = e instanceof Error ? e.message : "Failed to send.";
+    //     return err(message, null);
+    // }
+
     try {
-        const { data, error } = await resend.emails.send({
-            from,
-            to,
-            replyTo: email,
-            subject: `Portfolio contact from ${name}`,
-            text: `From: ${name} <${email}>\n\n${message}`,
+        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({ name, email, message }),
         });
-
-        if (error) {
-            const code =
-                "statusCode" in error && typeof error.statusCode === "number"
-                    ? error.statusCode
-                    : null;
-            return err(error.message ?? "Failed to send.", code);
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            return err((data as { message?: string })?.message ?? "Failed to send.", res.status);
         }
-
-        if (!data?.id) {
-            return err("Failed to send.", 502);
-        }
-
         return { ok: true };
     } catch (e) {
         const message = e instanceof Error ? e.message : "Failed to send.";

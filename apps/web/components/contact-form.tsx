@@ -11,12 +11,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/components/ui/toast";
 import { contactFormSchema, type ContactFormValues } from "@/app/contact/schema";
 import { cn } from "@repo/ui/utils";
-import { submitContactForm } from "@/app/contact/actions";
 
 // Loading blocks only the submit button; inputs stay editable.
 // local state keeps form logic isolated.
+// Submitting to formsubmit.co from the client so their first-time confirmation email is triggered.
 
-export function ContactForm() {
+export function ContactForm({ contactToEmail }: { contactToEmail: string }) {
     const [loading, setLoading] = useState(false);
     const { add } = useToast();
 
@@ -30,25 +30,34 @@ export function ContactForm() {
 
     async function onSubmit(data: ContactFormValues) {
         if (loading) return;
+        if (!contactToEmail?.trim()) {
+            add({ title: "Contact form is not configured.", type: "error" });
+            return;
+        }
         setLoading(true);
         try {
-            const formData = new FormData();
-            formData.set("name", data.name);
-            formData.set("email", data.email);
-            formData.set("message", data.message);
-            const result = await submitContactForm(null, formData);
-            if (result && !result.ok) {
-                const status = result.statusCode != null ? `${result.statusCode} — ` : "";
-                add({
-                    title: `${status}${result.error ?? "failed to send message."}`,
-                    type: "error",
-                });
+            const res = await fetch(
+                `https://formsubmit.co/ajax/${encodeURIComponent(contactToEmail.trim())}`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", Accept: "application/json" },
+                    body: JSON.stringify({
+                        name: data.name,
+                        email: data.email,
+                        message: data.message,
+                    }),
+                }
+            );
+            const body = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                const msg = (body as { message?: string })?.message ?? "Failed to send message.";
+                add({ title: msg, type: "error" });
                 return;
             }
-            add({ title: "message sent successfully.", type: "primary" });
+            add({ title: "Message sent successfully.", type: "primary" });
             form.reset();
         } catch (e) {
-            const message = e instanceof Error ? e.message : "failed to send message.";
+            const message = e instanceof Error ? e.message : "Failed to send message.";
             add({ title: message, type: "error" });
         } finally {
             setLoading(false);

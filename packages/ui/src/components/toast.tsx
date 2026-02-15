@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Toast } from "@base-ui/react/toast";
 import { CircleAlert, CircleCheck, Info, Loader, TriangleAlert } from "lucide-react";
 
@@ -31,6 +32,10 @@ function ToastProvider({ children, ...props }: React.ComponentProps<typeof Toast
 
 function ToastList() {
     const { toasts } = useToast();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
 
     return (
         <Toast.Portal data-slot="toast-portal">

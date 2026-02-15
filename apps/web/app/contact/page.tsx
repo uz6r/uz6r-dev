@@ -26,7 +26,7 @@ export default function ContactPage() {
                                 Send a message and I&apos;ll get back to you.
                             </p>
                         </div>
-                        <ContactForm />
+                        <ContactForm contactToEmail={process.env.CONTACT_TO_EMAIL ?? ""} />
                     </Container>
                 </Section>
             </main>
