@@ -17,8 +17,8 @@ function useIsDesktop() {
     const [isDesktop, setIsDesktop] = useState(false);
     useEffect(() => {
         const m = window.matchMedia(DESKTOP_BREAKPOINT);
-        setIsDesktop(m.matches);
         const handler = () => setIsDesktop(m.matches);
+        queueMicrotask(() => handler());
         m.addEventListener("change", handler);
         return () => m.removeEventListener("change", handler);
     }, []);
