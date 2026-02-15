@@ -50,7 +50,7 @@ export function ThemeToggle() {
             <Switch
                 checked={isDark}
                 onCheckedChange={setTheme}
-                className="data-unchecked:bg-amber-400/90 data-unchecked:border-amber-500/60 data-unchecked:hover:bg-amber-400 data-checked:bg-primary data-checked:border-primary transition-colors duration-200"
+                className="data-unchecked:bg-amber-400/90 data-unchecked:border-amber-500/60 data-unchecked:hover:bg-amber-400 data-checked:bg-secondary data-checked:border-secondary transition-colors duration-200"
                 aria-label="Toggle dark mode"
             />
             <span

@@ -100,7 +100,6 @@
         padding-bottom: env(safe-area-inset-bottom, 0px);
         padding-left: env(safe-area-inset-left, 0px);
     }
-
 }
 
 /* No focus ring/outline globally — flat UI, no focus chrome on buttons/inputs/items */
