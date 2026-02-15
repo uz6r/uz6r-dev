@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Portfolio uses a flat UI style to emphasise content hierarchy
+   over visual depth. This keeps the design closer to engineering tools
+   rather than marketing landing pages. */
 @layer base {
     :root {
         /* Light mode — neutral grays only */

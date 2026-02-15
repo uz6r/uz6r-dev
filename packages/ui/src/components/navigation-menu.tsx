@@ -110,7 +110,7 @@ function NavigationMenuViewport({
             >
                 <BaseNavigationMenu.Popup
                     className={cn(
-                        "bg-popover text-popover-foreground h-[var(--popup-height)] w-[var(--popup-width)] origin-[var(--transform-origin)] overflow-hidden rounded-md border shadow-md transition-all data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0",
+                        "bg-popover text-popover-foreground h-[var(--popup-height)] w-[var(--popup-width)] origin-[var(--transform-origin)] overflow-hidden rounded-md border shadow-sm transition-all data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0",
                         className
                     )}
                     data-slot="navigation-menu-popup"

@@ -47,7 +47,7 @@ function ToastList() {
                             // CSS variables for stacking calculations
                             "[--gap:0.8rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]",
                             // Base styles
-                            "bg-popover absolute right-0 bottom-0 left-auto z-[calc(1000-var(--toast-index))] mr-0 flex w-full origin-bottom items-center justify-between gap-1.5 rounded-lg border bg-clip-padding p-4 shadow-lg select-none",
+                            "bg-popover absolute right-0 bottom-0 left-auto z-[calc(1000-var(--toast-index))] mr-0 flex w-full origin-bottom items-center justify-between gap-1.5 rounded-lg border bg-clip-padding p-4 shadow-sm select-none",
                             // Height based on frontmost toast
                             "h-[var(--height)]",
                             // Transitions
