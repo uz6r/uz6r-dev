@@ -57,7 +57,7 @@ export function ResponsiveOverlay({ trigger, title, children }: ResponsiveOverla
             <>
                 {triggerWrapper}
                 <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogContent className="shadow-sm">
+                    <DialogContent>
                         <DialogHeader>
                             <DialogTitle>{title}</DialogTitle>
                         </DialogHeader>
@@ -72,7 +72,7 @@ export function ResponsiveOverlay({ trigger, title, children }: ResponsiveOverla
         <>
             {triggerWrapper}
             <Drawer open={open} onOpenChange={setOpen} direction="bottom">
-                <DrawerContent className="shadow-sm">
+                <DrawerContent>
                     <div className="mx-auto w-full max-w-lg p-8">
                         <DrawerHeader className="p-0">
                             <DrawerTitle>{title}</DrawerTitle>

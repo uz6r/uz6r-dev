@@ -35,7 +35,16 @@ function isMobileAndroid(): boolean {
     return /Android/.test(navigator.userAgent);
 }
 
+function isAlreadyInstalled(): boolean {
+    if (typeof window === "undefined") return false;
+    if (window.matchMedia("(display-mode: standalone)").matches) return true;
+    if ("standalone" in navigator && (navigator as { standalone?: boolean }).standalone)
+        return true;
+    return false;
+}
+
 function shouldShowBanner(): boolean {
+    if (isAlreadyInstalled()) return false;
     const val = getCookie(COOKIE_NAME);
     if (val === "permanent") return false;
     if (val !== null) {
@@ -144,7 +153,7 @@ export function A2HSBanner() {
     if (isDesktop) {
         return (
             <Dialog open={visible} onOpenChange={handleOpenChange}>
-                <DialogContent className="max-w-sm shadow-sm" showCloseButton>
+                <DialogContent className="max-w-sm" showCloseButton>
                     <DialogHeader>
                         <DialogTitle>📱 Add to Home Screen</DialogTitle>
                     </DialogHeader>
@@ -156,7 +165,7 @@ export function A2HSBanner() {
 
     return (
         <Drawer open={visible} onOpenChange={handleOpenChange} direction="bottom">
-            <DrawerContent className="max-h-[85vh] border-t shadow-sm">
+            <DrawerContent className="max-h-[85vh] border-t">
                 <div className="mx-auto w-full max-w-lg">
                     <DrawerHeader>
                         <DrawerTitle>📱 Add to Home Screen</DrawerTitle>
