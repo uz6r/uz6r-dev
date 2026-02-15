@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     title: "Uzair Zahari",
     description:
         "Backend-focused software engineer: APIs, services, and server-side systems. Portfolio of production systems, workflows, and architecture work.",
+    manifest: "/manifest.json",
+    icons: {
+        icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+        apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    },
 };
 
 export default function RootLayout({

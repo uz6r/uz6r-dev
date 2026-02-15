@@ -16,12 +16,14 @@ export function ThemeToggle() {
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
-        setReady(true);
-        setIsDark(readIsDark());
         const handler = () => setIsDark(readIsDark());
         window.addEventListener(THEME_CHANGE_EVENT, handler);
         const m = window.matchMedia("(prefers-color-scheme: dark)");
         m.addEventListener("change", handler);
+        queueMicrotask(() => {
+            setReady(true);
+            setIsDark(readIsDark());
+        });
         return () => {
             window.removeEventListener(THEME_CHANGE_EVENT, handler);
             m.removeEventListener("change", handler);
