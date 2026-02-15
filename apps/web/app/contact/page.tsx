@@ -7,6 +7,9 @@ export const metadata = {
     title: "Contact",
 };
 
+// Always read env at request time so CONTACT_TO_EMAIL is current (e.g. after GitHub Actions sync).
+export const dynamic = "force-dynamic";
+
 // Contact form intentionally lightweight.
 // Designed to migrate later to backend or graphql without UI changes.
 // Resend: first-class Next.js/Vercel support, recipient email stays server-side.
@@ -26,7 +29,11 @@ export default function ContactPage() {
                                 Send a message and I&apos;ll get back to you.
                             </p>
                         </div>
-                        <ContactForm contactToEmail={process.env.CONTACT_TO_EMAIL ?? ""} />
+                        <ContactForm
+                            contactToEmail={
+                                process.env.CONTACT_TO_EMAIL?.trim() || "aluzairzahari@gmail.com"
+                            }
+                        />
                     </Container>
                 </Section>
             </main>
