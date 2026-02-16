@@ -1,7 +1,13 @@
 import Link from "next/link";
-import { Github, Instagram, Music, Twitter } from "lucide-react";
 import { Separator } from "@repo/ui/separator";
 import { Container } from "@/components/layout/container";
+import {
+    GithubIcon,
+    InstagramIcon,
+    LinkedinIcon,
+    TikTokIcon,
+    TwitterIcon,
+} from "@/components/social-icons";
 
 // Footer intentionally minimal.
 // Portfolio prioritises content signal over promotional UI elements.
@@ -9,10 +15,11 @@ import { Container } from "@/components/layout/container";
 const BUY_ME_A_COFFEE_URL = "https://buymeacoffee.com/uzer";
 
 const SOCIAL_LINKS = [
-    { href: "https://github.com/uz6r", label: "GitHub", icon: Github },
-    { href: "https://www.instagram.com/uzairzahari/", label: "Instagram", icon: Instagram },
-    { href: "https://x.com/uzairzahari", label: "X (Twitter)", icon: Twitter },
-    { href: "https://www.tiktok.com/@uzair.zahari", label: "TikTok", icon: Music },
+    { href: "https://github.com/uz6r", label: "GitHub", icon: GithubIcon },
+    { href: "https://www.instagram.com/uzairzahari/", label: "Instagram", icon: InstagramIcon },
+    { href: "https://x.com/uzairzahari", label: "X (Twitter)", icon: TwitterIcon },
+    { href: "https://www.linkedin.com/in/uzairzahari/", label: "LinkedIn", icon: LinkedinIcon },
+    { href: "https://www.tiktok.com/@uzair.zahari", label: "TikTok", icon: TikTokIcon },
 ] as const;
 
 export function Footer() {
