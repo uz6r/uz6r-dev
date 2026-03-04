@@ -22,7 +22,7 @@ const FIRST_ROLE = ROLES[0] ?? "";
 
 type Phase = "typing" | "pausing" | "deleting";
 
-export function RotatingRoles({ className }: { className?: string }) {
+export const RotatingRoles = ({ className }: { className?: string }) => {
     const [mounted, setMounted] = useState(false);
     const [roleIndex, setRoleIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(FIRST_ROLE.length);
@@ -98,4 +98,4 @@ export function RotatingRoles({ className }: { className?: string }) {
             />
         </span>
     );
-}
+};

@@ -3,14 +3,14 @@ import { ScrollArea as BaseScrollArea } from "@base-ui/react/scroll-area";
 
 import { cn } from "../lib/utils";
 
-function ScrollArea({
+export const ScrollArea = ({
     className,
     children,
     orientation,
     ...props
 }: React.ComponentProps<typeof BaseScrollArea.Root> & {
     orientation?: "horizontal" | "vertical";
-}) {
+}) => {
     return (
         <BaseScrollArea.Root
             data-slot="scroll-area"
@@ -27,13 +27,13 @@ function ScrollArea({
             <BaseScrollArea.Corner />
         </BaseScrollArea.Root>
     );
-}
+};
 
-function ScrollBar({
+const ScrollBar = ({
     className,
     orientation = "vertical",
     ...props
-}: React.ComponentProps<typeof BaseScrollArea.Scrollbar>) {
+}: React.ComponentProps<typeof BaseScrollArea.Scrollbar>) => {
     return (
         <BaseScrollArea.Scrollbar
             data-slot="scroll-area-scrollbar"
@@ -52,6 +52,4 @@ function ScrollBar({
             />
         </BaseScrollArea.Scrollbar>
     );
-}
-
-export { ScrollArea };
+};

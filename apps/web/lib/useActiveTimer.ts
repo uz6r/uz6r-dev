@@ -2,12 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-/**
- * Tracks cumulative active time (tab visible) in seconds.
- * Resets when the tab becomes hidden (visibilitychange → hidden).
- * Use for delayed prompts that should only run after sustained engagement.
- */
-export function useActiveTimer(): number {
+export const useActiveTimer = (): number => {
     const [activeSeconds, setActiveSeconds] = useState(0);
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -50,4 +45,4 @@ export function useActiveTimer(): number {
     }, []);
 
     return activeSeconds;
-}
+};

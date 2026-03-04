@@ -4,10 +4,10 @@
 /** Simple, safe email regex (not overly strict). */
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function isValidEmail(email: string): boolean {
+export const isValidEmail = (email: string): boolean => {
     return EMAIL_REGEX.test(email.trim());
-}
+};
 
-export function isNonEmpty(value: string): boolean {
+export const isNonEmpty = (value: string): boolean => {
     return value.trim().length > 0;
-}
+};

@@ -8,7 +8,7 @@ export const metadata = {
     title: "Projects",
 };
 
-export default function ProjectsPage() {
+const ProjectsPage = () => {
     return (
         <>
             <Navbar />
@@ -25,4 +25,6 @@ export default function ProjectsPage() {
             </main>
         </>
     );
-}
+};
+
+export default ProjectsPage;

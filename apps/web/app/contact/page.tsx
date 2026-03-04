@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 // Designed to migrate later to backend or graphql without UI changes.
 // Resend: first-class Next.js/Vercel support, recipient email stays server-side.
 
-export default function ContactPage() {
+const ContactPage = () => {
     return (
         <>
             <Navbar />
@@ -39,4 +39,6 @@ export default function ContactPage() {
             </main>
         </>
     );
-}
+};
+
+export default ContactPage;

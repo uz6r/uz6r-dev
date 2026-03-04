@@ -6,12 +6,12 @@ import { Switch } from "@repo/ui/switch";
 
 const THEME_CHANGE_EVENT = "themechange";
 
-function readIsDark(): boolean {
+const readIsDark = (): boolean => {
     if (typeof document === "undefined") return false;
     return document.documentElement.classList.contains("dark");
-}
+};
 
-export function ThemeToggle() {
+export const ThemeToggle = () => {
     const [ready, setReady] = useState(false);
     const [isDark, setIsDark] = useState(false);
 
@@ -63,4 +63,4 @@ export function ThemeToggle() {
             </span>
         </div>
     );
-}
+};

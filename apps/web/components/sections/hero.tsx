@@ -9,7 +9,7 @@ interface HeroProps {
     bio: string;
 }
 
-export function Hero({ title, bio }: HeroProps) {
+export const Hero = ({ title, bio }: HeroProps) => {
     return (
         <Section className="border-b">
             <Container>
@@ -37,4 +37,4 @@ export function Hero({ title, bio }: HeroProps) {
             </Container>
         </Section>
     );
-}
+};

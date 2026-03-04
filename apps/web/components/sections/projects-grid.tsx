@@ -10,7 +10,7 @@ interface ProjectsGridProps {
     title?: string;
 }
 
-export function ProjectsGrid({ entries, title = "Projects" }: ProjectsGridProps) {
+export const ProjectsGrid = ({ entries, title = "Projects" }: ProjectsGridProps) => {
     const projects = entries.filter((e) => e.type === PROJECT_TYPE);
 
     return (
@@ -36,4 +36,4 @@ export function ProjectsGrid({ entries, title = "Projects" }: ProjectsGridProps)
             </Container>
         </Section>
     );
-}
+};

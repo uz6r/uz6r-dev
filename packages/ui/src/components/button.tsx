@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "../lib/utils";
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-70 data-disabled:shadow-none [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
     {
         variants: {
@@ -40,9 +40,10 @@ const buttonVariants = cva(
     }
 );
 
-type ButtonProps = VariantProps<typeof buttonVariants> & React.ComponentProps<typeof BaseButton>;
+export type ButtonProps = VariantProps<typeof buttonVariants> &
+    React.ComponentProps<typeof BaseButton>;
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+export const Button = ({ className, variant, size, ...props }: ButtonProps) => {
     return (
         <BaseButton
             data-slot="button"
@@ -50,7 +51,4 @@ function Button({ className, variant, size, ...props }: ButtonProps) {
             {...props}
         />
     );
-}
-
-export { Button, buttonVariants };
-export type { ButtonProps };
+};

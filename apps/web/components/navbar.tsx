@@ -16,7 +16,7 @@ const links = [
     { href: "/contact", label: "Contact" },
 ] as const;
 
-export function Navbar() {
+export const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
@@ -95,4 +95,4 @@ export function Navbar() {
             </Drawer>
         </header>
     );
-}
+};

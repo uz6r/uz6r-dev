@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const THUMB_UNCHECKED = "translate-x-px";
 const THUMB_CHECKED = "translate-x-[calc(100%-3px)]";
 
-function Switch({ className, ...props }: React.ComponentProps<typeof BaseSwitch.Root>) {
+export const Switch = ({ className, ...props }: React.ComponentProps<typeof BaseSwitch.Root>) => {
     return (
         <BaseSwitch.Root
             data-slot="switch"
@@ -28,6 +28,4 @@ function Switch({ className, ...props }: React.ComponentProps<typeof BaseSwitch.
             />
         </BaseSwitch.Root>
     );
-}
-
-export { Switch };
+};

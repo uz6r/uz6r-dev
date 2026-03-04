@@ -13,7 +13,7 @@ interface BlogSectionProps {
     showAllLink?: { href: string; label: string };
 }
 
-export function BlogSection({ posts, title = "Blog", showAllLink }: BlogSectionProps) {
+export const BlogSection = ({ posts, title = "Blog", showAllLink }: BlogSectionProps) => {
     if (posts.length === 0) return null;
 
     return (
@@ -90,4 +90,4 @@ export function BlogSection({ posts, title = "Blog", showAllLink }: BlogSectionP
             </Container>
         </Section>
     );
-}
+};

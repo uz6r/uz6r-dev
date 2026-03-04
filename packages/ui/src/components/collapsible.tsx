@@ -3,15 +3,15 @@ import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
 
 import { cn } from "../lib/utils";
 
-function Collapsible({ ...props }: BaseCollapsible.Root.Props) {
+export const Collapsible = ({ ...props }: BaseCollapsible.Root.Props) => {
     return <BaseCollapsible.Root data-slot="collapsible" {...props} />;
-}
+};
 
-function CollapsibleTrigger({ ...props }: BaseCollapsible.Trigger.Props) {
+export const CollapsibleTrigger = ({ ...props }: BaseCollapsible.Trigger.Props) => {
     return <BaseCollapsible.Trigger data-slot="collapsible-trigger" {...props} />;
-}
+};
 
-function CollapsibleContent({ className, ...props }: BaseCollapsible.Panel.Props) {
+export const CollapsibleContent = ({ className, ...props }: BaseCollapsible.Panel.Props) => {
     return (
         <BaseCollapsible.Panel
             data-slot="collapsible-content"
@@ -22,6 +22,4 @@ function CollapsibleContent({ className, ...props }: BaseCollapsible.Panel.Props
             {...props}
         />
     );
-}
-
-export { Collapsible, CollapsibleTrigger, CollapsibleContent };
+};

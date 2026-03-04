@@ -5,11 +5,11 @@ import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "../lib/utils";
 
-function NavigationMenu({
+export const NavigationMenu = ({
     className,
     children,
     ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Root>) {
+}: React.ComponentProps<typeof BaseNavigationMenu.Root>) => {
     return (
         <BaseNavigationMenu.Root
             data-slot="navigation-menu"
@@ -20,12 +20,12 @@ function NavigationMenu({
             <NavigationMenuViewport />
         </BaseNavigationMenu.Root>
     );
-}
+};
 
-function NavigationMenuList({
+export const NavigationMenuList = ({
     className,
     ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.List>) {
+}: React.ComponentProps<typeof BaseNavigationMenu.List>) => {
     return (
         <BaseNavigationMenu.List
             data-slot="navigation-menu-list"
@@ -33,25 +33,27 @@ function NavigationMenuList({
             {...props}
         />
     );
-}
+};
 
-function NavigationMenuItem({ ...props }: React.ComponentProps<typeof BaseNavigationMenu.Item>) {
+export const NavigationMenuItem = ({
+    ...props
+}: React.ComponentProps<typeof BaseNavigationMenu.Item>) => {
     return <BaseNavigationMenu.Item data-slot="navigation-menu-item" {...props} />;
-}
+};
 
-function NavigationMenuIcon({ ...props }: React.ComponentProps<typeof BaseNavigationMenu.Icon>) {
+const NavigationMenuIcon = ({ ...props }: React.ComponentProps<typeof BaseNavigationMenu.Icon>) => {
     return <BaseNavigationMenu.Icon data-slot="navigation-menu-icon" {...props} />;
-}
+};
 
-const navigationMenuTriggerStyle = cva(
+export const navigationMenuTriggerStyle = cva(
     "inline-flex w-max items-center justify-center gap-1.5 h-9 rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 data-popup-open:hover:bg-accent data-popup-open:text-accent-foreground data-popup-open:focus:bg-accent data-popup-open:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-3 focus-visible:outline-1 select-none no-underline [&_svg:not([class*='size-'])]:size-3 shrink-0 [&_svg]:shrink-0"
 );
 
-function NavigationMenuTrigger({
+export const NavigationMenuTrigger = ({
     className,
     children,
     ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Trigger>) {
+}: React.ComponentProps<typeof BaseNavigationMenu.Trigger>) => {
     return (
         <BaseNavigationMenu.Trigger
             data-slot="navigation-menu-trigger"
@@ -65,12 +67,12 @@ function NavigationMenuTrigger({
             </NavigationMenuIcon>
         </BaseNavigationMenu.Trigger>
     );
-}
+};
 
-function NavigationMenuContent({
+export const NavigationMenuContent = ({
     className,
     ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Content>) {
+}: React.ComponentProps<typeof BaseNavigationMenu.Content>) => {
     return (
         <BaseNavigationMenu.Content
             data-slot="navigation-menu-content"
@@ -78,12 +80,12 @@ function NavigationMenuContent({
             {...props}
         />
     );
-}
+};
 
-function NavigationMenuLink({
+export const NavigationMenuLink = ({
     className,
     ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Link>) {
+}: React.ComponentProps<typeof BaseNavigationMenu.Link>) => {
     return (
         <BaseNavigationMenu.Link
             data-slot="navigation-menu-link"
@@ -94,12 +96,12 @@ function NavigationMenuLink({
             {...props}
         />
     );
-}
+};
 
-function NavigationMenuViewport({
+const NavigationMenuViewport = ({
     className,
     ...props
-}: React.ComponentProps<typeof BaseNavigationMenu.Popup>) {
+}: React.ComponentProps<typeof BaseNavigationMenu.Popup>) => {
     return (
         <BaseNavigationMenu.Portal data-slot="navigation-menu-portal">
             <BaseNavigationMenu.Positioner
@@ -121,14 +123,4 @@ function NavigationMenuViewport({
             </BaseNavigationMenu.Positioner>
         </BaseNavigationMenu.Portal>
     );
-}
-
-export {
-    NavigationMenu,
-    NavigationMenuList,
-    NavigationMenuItem,
-    NavigationMenuTrigger,
-    NavigationMenuContent,
-    NavigationMenuLink,
-    navigationMenuTriggerStyle,
 };

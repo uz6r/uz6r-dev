@@ -6,23 +6,25 @@ import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 
 import { cn } from "../lib/utils";
 
-function DropdownMenu({ ...props }: React.ComponentProps<typeof BaseMenu.Root>) {
+export const DropdownMenu = ({ ...props }: React.ComponentProps<typeof BaseMenu.Root>) => {
     return <BaseMenu.Root data-slot="dropdown-menu" {...props} />;
-}
+};
 
-function DropdownMenuPortal({ ...props }: React.ComponentProps<typeof BaseMenu.Portal>) {
+export const DropdownMenuPortal = ({ ...props }: React.ComponentProps<typeof BaseMenu.Portal>) => {
     return <BaseMenu.Portal data-slot="dropdown-menu-portal" {...props} />;
-}
+};
 
-function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof BaseMenu.Trigger>) {
+export const DropdownMenuTrigger = ({
+    ...props
+}: React.ComponentProps<typeof BaseMenu.Trigger>) => {
     return <BaseMenu.Trigger data-slot="dropdown-menu-trigger" {...props} />;
-}
+};
 
-function DropdownMenuPositioner({ ...props }: React.ComponentProps<typeof BaseMenu.Positioner>) {
+const DropdownMenuPositioner = ({ ...props }: React.ComponentProps<typeof BaseMenu.Positioner>) => {
     return <BaseMenu.Positioner data-slot="dropdown-menu-positioner" {...props} />;
-}
+};
 
-function DropdownMenuContent({
+export const DropdownMenuContent = ({
     className,
     sideOffset = 4,
     align = "center",
@@ -32,7 +34,7 @@ function DropdownMenuContent({
     align?: BaseMenu.Positioner.Props["align"];
     sideOffset?: BaseMenu.Positioner.Props["sideOffset"];
     side?: BaseMenu.Positioner.Props["side"];
-}) {
+}) => {
     return (
         <DropdownMenuPortal>
             <DropdownMenuPositioner
@@ -52,13 +54,13 @@ function DropdownMenuContent({
             </DropdownMenuPositioner>
         </DropdownMenuPortal>
     );
-}
+};
 
-function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof BaseMenu.Group>) {
+export const DropdownMenuGroup = ({ ...props }: React.ComponentProps<typeof BaseMenu.Group>) => {
     return <BaseMenu.Group data-slot="dropdown-menu-group" {...props} />;
-}
+};
 
-function DropdownMenuItem({
+export const DropdownMenuItem = ({
     className,
     inset,
     variant = "default",
@@ -66,7 +68,7 @@ function DropdownMenuItem({
 }: React.ComponentProps<typeof BaseMenu.Item> & {
     inset?: boolean;
     variant?: "default" | "destructive";
-}) {
+}) => {
     return (
         <BaseMenu.Item
             data-slot="dropdown-menu-item"
@@ -79,9 +81,9 @@ function DropdownMenuItem({
             {...props}
         />
     );
-}
+};
 
-function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"span">) {
+export const DropdownMenuShortcut = ({ className, ...props }: React.ComponentProps<"span">) => {
     return (
         <span
             data-slot="dropdown-menu-shortcut"
@@ -89,12 +91,12 @@ function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"spa
             {...props}
         />
     );
-}
+};
 
-function DropdownMenuSeparator({
+export const DropdownMenuSeparator = ({
     className,
     ...props
-}: React.ComponentProps<typeof BaseMenu.Separator>) {
+}: React.ComponentProps<typeof BaseMenu.Separator>) => {
     return (
         <BaseMenu.Separator
             data-slot="dropdown-menu-separator"
@@ -102,15 +104,15 @@ function DropdownMenuSeparator({
             {...props}
         />
     );
-}
+};
 
-function DropdownMenuLabel({
+export const DropdownMenuLabel = ({
     className,
     inset,
     ...props
 }: React.ComponentProps<typeof BaseMenu.GroupLabel> & {
     inset?: boolean;
-}) {
+}) => {
     return (
         <BaseMenu.GroupLabel
             data-slot="dropdown-menu-label"
@@ -119,14 +121,14 @@ function DropdownMenuLabel({
             {...props}
         />
     );
-}
+};
 
-function DropdownMenuCheckboxItem({
+export const DropdownMenuCheckboxItem = ({
     className,
     children,
     checked,
     ...props
-}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) {
+}: React.ComponentProps<typeof BaseMenu.CheckboxItem>) => {
     return (
         <BaseMenu.CheckboxItem
             data-slot="dropdown-menu-checkbox-item"
@@ -145,17 +147,19 @@ function DropdownMenuCheckboxItem({
             {children}
         </BaseMenu.CheckboxItem>
     );
-}
+};
 
-function DropdownMenuRadioGroup({ ...props }: React.ComponentProps<typeof BaseMenu.RadioGroup>) {
+export const DropdownMenuRadioGroup = ({
+    ...props
+}: React.ComponentProps<typeof BaseMenu.RadioGroup>) => {
     return <BaseMenu.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />;
-}
+};
 
-function DropdownMenuRadioItem({
+export const DropdownMenuRadioItem = ({
     className,
     children,
     ...props
-}: React.ComponentProps<typeof BaseMenu.RadioItem>) {
+}: React.ComponentProps<typeof BaseMenu.RadioItem>) => {
     return (
         <BaseMenu.RadioItem
             data-slot="dropdown-menu-radio-item"
@@ -173,20 +177,22 @@ function DropdownMenuRadioItem({
             {children}
         </BaseMenu.RadioItem>
     );
-}
+};
 
-function DropdownMenuSub({ ...props }: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) {
+export const DropdownMenuSub = ({
+    ...props
+}: React.ComponentProps<typeof BaseMenu.SubmenuRoot>) => {
     return <BaseMenu.SubmenuRoot data-slot="dropdown-menu-sub" {...props} />;
-}
+};
 
-function DropdownMenuSubTrigger({
+export const DropdownMenuSubTrigger = ({
     className,
     inset,
     children,
     ...props
 }: React.ComponentProps<typeof BaseMenu.SubmenuTrigger> & {
     inset?: boolean;
-}) {
+}) => {
     return (
         <BaseMenu.SubmenuTrigger
             closeDelay={0}
@@ -203,9 +209,9 @@ function DropdownMenuSubTrigger({
             <ChevronRightIcon className="ml-auto size-4" />
         </BaseMenu.SubmenuTrigger>
     );
-}
+};
 
-function DropdownMenuSubContent({
+export const DropdownMenuSubContent = ({
     className,
     sideOffset = 0,
     align = "start",
@@ -213,7 +219,7 @@ function DropdownMenuSubContent({
 }: React.ComponentProps<typeof BaseMenu.Popup> & {
     align?: BaseMenu.Positioner.Props["align"];
     sideOffset?: BaseMenu.Positioner.Props["sideOffset"];
-}) {
+}) => {
     return (
         <DropdownMenuPortal>
             <DropdownMenuPositioner
@@ -232,22 +238,4 @@ function DropdownMenuSubContent({
             </DropdownMenuPositioner>
         </DropdownMenuPortal>
     );
-}
-
-export {
-    DropdownMenu,
-    DropdownMenuPortal,
-    DropdownMenuTrigger,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuLabel,
-    DropdownMenuItem,
-    DropdownMenuCheckboxItem,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubTrigger,
-    DropdownMenuSubContent,
 };

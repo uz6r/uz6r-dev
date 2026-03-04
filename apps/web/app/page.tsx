@@ -8,7 +8,7 @@ import { entries } from "@/data/entries";
 import { experience } from "@/data/experience";
 import { getMediumPosts } from "@/lib/medium-rss";
 
-export default async function HomePage() {
+const HomePage = async () => {
     const latestPosts = await getMediumPosts(2);
 
     return (
@@ -25,4 +25,6 @@ export default async function HomePage() {
             </main>
         </>
     );
-}
+};
+
+export default HomePage;

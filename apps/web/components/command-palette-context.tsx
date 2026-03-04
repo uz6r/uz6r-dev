@@ -17,13 +17,13 @@ type CommandPaletteContextValue = {
 
 const CommandPaletteContext = createContext<CommandPaletteContextValue | null>(null);
 
-export function useCommandPalette() {
+export const useCommandPalette = () => {
     const ctx = useContext(CommandPaletteContext);
     if (!ctx) return null;
     return ctx;
-}
+};
 
-export function CommandPaletteProvider({ children }: { children: React.ReactNode }) {
+export const CommandPaletteProvider = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);
     const openPalette = useCallback(() => setOpen(true), []);
 
@@ -32,4 +32,4 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
             {children}
         </CommandPaletteContext.Provider>
     );
-}
+};

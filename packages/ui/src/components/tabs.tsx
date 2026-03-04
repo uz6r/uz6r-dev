@@ -23,13 +23,13 @@ const useTabs = () => {
     return context;
 };
 
-function Tabs({
+export const Tabs = ({
     variant = "capsule",
     className,
     ...props
 }: React.ComponentProps<typeof BaseTabs.Root> & {
     variant?: TabsVariant;
-}) {
+}) => {
     return (
         <TabsContext.Provider value={{ variant }}>
             <BaseTabs.Root
@@ -39,9 +39,13 @@ function Tabs({
             />
         </TabsContext.Provider>
     );
-}
+};
 
-function TabsList({ className, children, ...props }: React.ComponentProps<typeof BaseTabs.List>) {
+export const TabsList = ({
+    className,
+    children,
+    ...props
+}: React.ComponentProps<typeof BaseTabs.List>) => {
     const { variant } = useTabs();
 
     return (
@@ -58,9 +62,9 @@ function TabsList({ className, children, ...props }: React.ComponentProps<typeof
             <TabIndicator />
         </BaseTabs.List>
     );
-}
+};
 
-function TabsTrigger({ className, ...props }: React.ComponentProps<typeof BaseTabs.Tab>) {
+export const TabsTrigger = ({ className, ...props }: React.ComponentProps<typeof BaseTabs.Tab>) => {
     return (
         <BaseTabs.Tab
             data-slot="tabs-trigger"
@@ -71,9 +75,9 @@ function TabsTrigger({ className, ...props }: React.ComponentProps<typeof BaseTa
             {...props}
         />
     );
-}
+};
 
-function TabIndicator({ className, ...props }: React.ComponentProps<typeof BaseTabs.Indicator>) {
+const TabIndicator = ({ className, ...props }: React.ComponentProps<typeof BaseTabs.Indicator>) => {
     const { variant } = useTabs();
 
     return (
@@ -89,9 +93,12 @@ function TabIndicator({ className, ...props }: React.ComponentProps<typeof BaseT
             {...props}
         />
     );
-}
+};
 
-function TabsContent({ className, ...props }: React.ComponentProps<typeof BaseTabs.Panel>) {
+export const TabsContent = ({
+    className,
+    ...props
+}: React.ComponentProps<typeof BaseTabs.Panel>) => {
     return (
         <BaseTabs.Panel
             data-slot="tabs-content"
@@ -99,6 +106,4 @@ function TabsContent({ className, ...props }: React.ComponentProps<typeof BaseTa
             {...props}
         />
     );
-}
-
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+};

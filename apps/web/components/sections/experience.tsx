@@ -9,7 +9,7 @@ interface ExperienceProps {
     title?: string;
 }
 
-export function Experience({ items, title = "Experience" }: ExperienceProps) {
+export const Experience = ({ items, title = "Experience" }: ExperienceProps) => {
     return (
         <Section>
             <Container>
@@ -58,4 +58,4 @@ export function Experience({ items, title = "Experience" }: ExperienceProps) {
             </Container>
         </Section>
     );
-}
+};

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "../lib/utils";
 
-function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const Card = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
     return (
         <div
             data-slot="card"
@@ -13,9 +13,9 @@ function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
             {...props}
         />
     );
-}
+};
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+export const CardHeader = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="card-header"
@@ -26,9 +26,9 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
+};
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+export const CardTitle = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="card-title"
@@ -36,9 +36,9 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
+};
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+export const CardDescription = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="card-description"
@@ -46,9 +46,9 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
+};
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+export const CardAction = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="card-action"
@@ -59,13 +59,13 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
+};
 
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+export const CardContent = ({ className, ...props }: React.ComponentProps<"div">) => {
     return <div data-slot="card-content" className={cn("px-6", className)} {...props} />;
-}
+};
 
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+export const CardFooter = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="card-footer"
@@ -73,6 +73,4 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
-
-export { Card, CardHeader, CardAction, CardTitle, CardDescription, CardContent, CardFooter };
+};

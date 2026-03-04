@@ -19,11 +19,11 @@ const avatarVariants = cva("relative flex shrink-0 overflow-hidden rounded-full"
     },
 });
 
-function Avatar({
+export const Avatar = ({
     className,
     size,
     ...props
-}: React.ComponentProps<typeof AvatarBase.Root> & VariantProps<typeof avatarVariants>) {
+}: React.ComponentProps<typeof AvatarBase.Root> & VariantProps<typeof avatarVariants>) => {
     return (
         <AvatarBase.Root
             data-slot="avatar"
@@ -31,9 +31,12 @@ function Avatar({
             {...props}
         />
     );
-}
+};
 
-function AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarBase.Image>) {
+export const AvatarImage = ({
+    className,
+    ...props
+}: React.ComponentProps<typeof AvatarBase.Image>) => {
     return (
         <AvatarBase.Image
             data-slot="avatar-image"
@@ -41,9 +44,12 @@ function AvatarImage({ className, ...props }: React.ComponentProps<typeof Avatar
             {...props}
         />
     );
-}
+};
 
-function AvatarFallback({ className, ...props }: React.ComponentProps<typeof AvatarBase.Fallback>) {
+export const AvatarFallback = ({
+    className,
+    ...props
+}: React.ComponentProps<typeof AvatarBase.Fallback>) => {
     return (
         <AvatarBase.Fallback
             data-slot="avatar-fallback"
@@ -54,6 +60,4 @@ function AvatarFallback({ className, ...props }: React.ComponentProps<typeof Ava
             {...props}
         />
     );
-}
-
-export { Avatar, AvatarImage, AvatarFallback };
+};

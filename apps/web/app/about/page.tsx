@@ -10,7 +10,7 @@ export const metadata = {
     title: "About",
 };
 
-export default function AboutPage() {
+const AboutPage = () => {
     return (
         <>
             <Navbar />
@@ -67,4 +67,6 @@ export default function AboutPage() {
             </main>
         </>
     );
-}
+};
+
+export default AboutPage;

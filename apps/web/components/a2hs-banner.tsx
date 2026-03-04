@@ -12,20 +12,20 @@ const COOKIE_MAX_AGE_DAYS = 365;
 const DESKTOP_BREAKPOINT = "(min-width: 768px)";
 const A2HS_TOAST_ACTIVE_SECONDS = 120;
 
-function getCookie(name: string): string | null {
+const getCookie = (name: string): string | null => {
     if (typeof document === "undefined") return null;
     const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
     const value = match?.[1];
     return value != null ? decodeURIComponent(value) : null;
-}
+};
 
-function setCookie(name: string, value: string) {
+const setCookie = (name: string, value: string) => {
     if (typeof document === "undefined") return;
     const maxAge = COOKIE_MAX_AGE_DAYS * 24 * 60 * 60;
     document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax`;
-}
+};
 
-function isMobileIOS(): boolean {
+const isMobileIOS = (): boolean => {
     if (typeof navigator === "undefined") return false;
     // Prefer modern userAgentData API; fall back to deprecated UA string.
     const uad = (navigator as { userAgentData?: { platform?: string } }).userAgentData;
@@ -36,26 +36,26 @@ function isMobileIOS(): boolean {
         /iPad|iPhone|iPod/.test(navigator.userAgent) ||
         (navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent))
     );
-}
+};
 
-function isMobileAndroid(): boolean {
+const isMobileAndroid = (): boolean => {
     if (typeof navigator === "undefined") return false;
     const uad = (navigator as { userAgentData?: { platform?: string } }).userAgentData;
     if (uad?.platform) {
         return /Android/i.test(uad.platform);
     }
     return /Android/.test(navigator.userAgent);
-}
+};
 
-function isAlreadyInstalled(): boolean {
+const isAlreadyInstalled = (): boolean => {
     if (typeof window === "undefined") return false;
     if (window.matchMedia("(display-mode: standalone)").matches) return true;
     if ("standalone" in navigator && (navigator as { standalone?: boolean }).standalone)
         return true;
     return false;
-}
+};
 
-function shouldShowBanner(): boolean {
+const shouldShowBanner = (): boolean => {
     if (isAlreadyInstalled()) return false;
     const val = getCookie(COOKIE_NAME);
     if (val === "permanent") return false;
@@ -64,9 +64,9 @@ function shouldShowBanner(): boolean {
         if (!Number.isNaN(n) && n >= MAX_NOT_NOW) return false;
     }
     return isMobileIOS() || isMobileAndroid();
-}
+};
 
-function useIsDesktop() {
+const useIsDesktop = () => {
     const [isDesktop, setIsDesktop] = useState(false);
     useEffect(() => {
         const m = window.matchMedia(DESKTOP_BREAKPOINT);
@@ -76,9 +76,9 @@ function useIsDesktop() {
         return () => m.removeEventListener("change", handler);
     }, []);
     return isDesktop;
-}
+};
 
-function A2HSContent({
+const A2HSContent = ({
     isIOS,
     onNotNow,
     onDoNotShowAgain,
@@ -86,7 +86,7 @@ function A2HSContent({
     isIOS: boolean;
     onNotNow: () => void;
     onDoNotShowAgain: () => void;
-}) {
+}) => {
     return (
         <>
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -120,9 +120,9 @@ function A2HSContent({
             </div>
         </>
     );
-}
+};
 
-export function A2HSBanner() {
+export const A2HSBanner = () => {
     const [visible, setVisible] = useState(false);
     const [isIOS, setIsIOS] = useState(false);
     const isDesktop = useIsDesktop();
@@ -206,4 +206,4 @@ export function A2HSBanner() {
             </DrawerContent>
         </Drawer>
     );
-}
+};

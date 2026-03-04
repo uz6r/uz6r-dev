@@ -6,15 +6,15 @@ import { ResponsiveOverlay } from "@/components/ui/responsive-overlay";
 import type { Entry } from "@/types/entry";
 import type { ProjectMetadata } from "@/types/entry";
 
-function asProjectMetadata(metadata?: Record<string, unknown>): ProjectMetadata | undefined {
+const asProjectMetadata = (metadata?: Record<string, unknown>): ProjectMetadata | undefined => {
     if (!metadata || typeof metadata !== "object") return undefined;
     const stack = metadata.stack;
     if (stack && (!Array.isArray(stack) || !stack.every((s) => typeof s === "string")))
         return undefined;
     return { stack: stack as string[], state: metadata.state as ProjectMetadata["state"] };
-}
+};
 
-function getStateVariant(state?: string) {
+const getStateVariant = (state?: string) => {
     switch (state) {
         case "PUBLISHED":
             return "success";
@@ -27,7 +27,7 @@ function getStateVariant(state?: string) {
         default:
             return "secondary";
     }
-}
+};
 
 const STATE_LABELS: Record<string, string> = {
     PUBLISHED: "Published",
@@ -43,7 +43,7 @@ interface ProjectCardDrawerProps {
     entry: Entry;
 }
 
-export function ProjectCardDrawer({ entry }: ProjectCardDrawerProps) {
+export const ProjectCardDrawer = ({ entry }: ProjectCardDrawerProps) => {
     const meta = asProjectMetadata(entry.metadata);
     const stack = meta?.stack ?? [];
     const href = entry.url ?? undefined;
@@ -131,4 +131,4 @@ export function ProjectCardDrawer({ entry }: ProjectCardDrawerProps) {
             </div>
         </ResponsiveOverlay>
     );
-}
+};

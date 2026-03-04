@@ -4,11 +4,14 @@ import { ChevronRightIcon } from "lucide-react";
 
 import { cn } from "../lib/utils";
 
-function Accordion({ ...props }: React.ComponentProps<typeof BaseAccordion.Root>) {
+export const Accordion = ({ ...props }: React.ComponentProps<typeof BaseAccordion.Root>) => {
     return <BaseAccordion.Root data-slot="accordion" {...props} />;
-}
+};
 
-function AccordionItem({ className, ...props }: React.ComponentProps<typeof BaseAccordion.Item>) {
+export const AccordionItem = ({
+    className,
+    ...props
+}: React.ComponentProps<typeof BaseAccordion.Item>) => {
     return (
         <BaseAccordion.Item
             data-slot="accordion-item"
@@ -16,13 +19,13 @@ function AccordionItem({ className, ...props }: React.ComponentProps<typeof Base
             {...props}
         />
     );
-}
+};
 
-function AccordionTrigger({
+export const AccordionTrigger = ({
     children,
     className,
     ...props
-}: React.ComponentProps<typeof BaseAccordion.Trigger>) {
+}: React.ComponentProps<typeof BaseAccordion.Trigger>) => {
     return (
         <BaseAccordion.Header className="flex">
             <BaseAccordion.Trigger
@@ -44,13 +47,13 @@ function AccordionTrigger({
             </BaseAccordion.Trigger>
         </BaseAccordion.Header>
     );
-}
+};
 
-function AccordionContent({
+export const AccordionContent = ({
     children,
     className,
     ...props
-}: React.ComponentProps<typeof BaseAccordion.Panel>) {
+}: React.ComponentProps<typeof BaseAccordion.Panel>) => {
     return (
         <BaseAccordion.Panel
             data-slot="accordion-content"
@@ -65,6 +68,4 @@ function AccordionContent({
             <div className={cn("pb-2.5", className)}>{children}</div>
         </BaseAccordion.Panel>
     );
-}
-
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+};

@@ -3,7 +3,7 @@
 import { Search } from "lucide-react";
 import { useCommandPalette } from "@/components/command-palette-context";
 
-export function CommandPaletteTrigger() {
+export const CommandPaletteTrigger = () => {
     const ctx = useCommandPalette();
     if (!ctx) return null;
 
@@ -23,4 +23,4 @@ export function CommandPaletteTrigger() {
             </kbd>
         </button>
     );
-}
+};

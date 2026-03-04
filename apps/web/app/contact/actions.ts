@@ -9,14 +9,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export type SubmitState = { ok: true } | { ok: false; error: string; statusCode?: number | null };
 
-function err(message: string, statusCode?: number | null): Extract<SubmitState, { ok: false }> {
+const err = (message: string, statusCode?: number | null): Extract<SubmitState, { ok: false }> => {
     return { ok: false, error: message, statusCode: statusCode ?? null };
-}
+};
 
-export async function submitContactForm(
+export const submitContactForm = async (
     _prevState: SubmitState | null,
     formData: FormData
-): Promise<SubmitState> {
+): Promise<SubmitState> => {
     const name = (formData.get("name") as string)?.trim();
     const email = (formData.get("email") as string)?.trim();
     const message = (formData.get("message") as string)?.trim();
@@ -77,4 +77,4 @@ export async function submitContactForm(
         const message = e instanceof Error ? e.message : "Failed to send.";
         return err(message, null);
     }
-}
+};

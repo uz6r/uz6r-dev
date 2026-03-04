@@ -6,23 +6,26 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "../lib/utils";
 
-function Sheet({ ...props }: React.ComponentProps<typeof BaseSheet.Root>) {
+export const Sheet = ({ ...props }: React.ComponentProps<typeof BaseSheet.Root>) => {
     return <BaseSheet.Root data-slot="sheet" {...props} />;
-}
+};
 
-function SheetTrigger({ ...props }: React.ComponentProps<typeof BaseSheet.Trigger>) {
+export const SheetTrigger = ({ ...props }: React.ComponentProps<typeof BaseSheet.Trigger>) => {
     return <BaseSheet.Trigger data-slot="sheet-trigger" {...props} />;
-}
+};
 
-function SheetClose({ ...props }: React.ComponentProps<typeof BaseSheet.Close>) {
+export const SheetClose = ({ ...props }: React.ComponentProps<typeof BaseSheet.Close>) => {
     return <BaseSheet.Close data-slot="sheet-close" {...props} />;
-}
+};
 
-function SheetPortal({ ...props }: React.ComponentProps<typeof BaseSheet.Portal>) {
+const SheetPortal = ({ ...props }: React.ComponentProps<typeof BaseSheet.Portal>) => {
     return <BaseSheet.Portal data-slot="sheet-portal" {...props} />;
-}
+};
 
-function SheetOverlay({ className, ...props }: React.ComponentProps<typeof BaseSheet.Backdrop>) {
+export const SheetOverlay = ({
+    className,
+    ...props
+}: React.ComponentProps<typeof BaseSheet.Backdrop>) => {
     return (
         <BaseSheet.Backdrop
             data-slot="sheet-overlay"
@@ -33,16 +36,16 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<typeof BaseS
             {...props}
         />
     );
-}
+};
 
-function SheetContent({
+export const SheetContent = ({
     className,
     children,
     side = "right",
     ...props
 }: React.ComponentProps<typeof BaseSheet.Popup> & {
     side?: "top" | "right" | "bottom" | "left";
-}) {
+}) => {
     return (
         <SheetPortal>
             <SheetOverlay />
@@ -70,9 +73,9 @@ function SheetContent({
             </BaseSheet.Popup>
         </SheetPortal>
     );
-}
+};
 
-function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
+export const SheetHeader = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="sheet-header"
@@ -80,9 +83,12 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
+};
 
-function SheetTitle({ className, ...props }: React.ComponentProps<typeof BaseSheet.Title>) {
+export const SheetTitle = ({
+    className,
+    ...props
+}: React.ComponentProps<typeof BaseSheet.Title>) => {
     return (
         <BaseSheet.Title
             data-slot="sheet-title"
@@ -90,12 +96,12 @@ function SheetTitle({ className, ...props }: React.ComponentProps<typeof BaseShe
             {...props}
         />
     );
-}
+};
 
-function SheetDescription({
+export const SheetDescription = ({
     className,
     ...props
-}: React.ComponentProps<typeof BaseSheet.Description>) {
+}: React.ComponentProps<typeof BaseSheet.Description>) => {
     return (
         <BaseSheet.Description
             data-slot="sheet-description"
@@ -103,9 +109,9 @@ function SheetDescription({
             {...props}
         />
     );
-}
+};
 
-function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
+export const SheetFooter = ({ className, ...props }: React.ComponentProps<"div">) => {
     return (
         <div
             data-slot="sheet-footer"
@@ -113,16 +119,4 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
             {...props}
         />
     );
-}
-
-export {
-    Sheet,
-    SheetOverlay,
-    SheetContent,
-    SheetTrigger,
-    SheetClose,
-    SheetHeader,
-    SheetTitle,
-    SheetDescription,
-    SheetFooter,
 };

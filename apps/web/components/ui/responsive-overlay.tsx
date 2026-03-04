@@ -13,7 +13,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTitle } from "@
 
 const DESKTOP_BREAKPOINT = "(min-width: 768px)";
 
-function useIsDesktop() {
+const useIsDesktop = () => {
     const [isDesktop, setIsDesktop] = useState(false);
     useEffect(() => {
         const m = window.matchMedia(DESKTOP_BREAKPOINT);
@@ -23,7 +23,7 @@ function useIsDesktop() {
         return () => m.removeEventListener("change", handler);
     }, []);
     return isDesktop;
-}
+};
 
 interface ResponsiveOverlayProps {
     trigger: React.ReactNode;
@@ -31,7 +31,7 @@ interface ResponsiveOverlayProps {
     children: React.ReactNode;
 }
 
-export function ResponsiveOverlay({ trigger, title, children }: ResponsiveOverlayProps) {
+export const ResponsiveOverlay = ({ trigger, title, children }: ResponsiveOverlayProps) => {
     const [open, setOpen] = useState(false);
     const isDesktop = useIsDesktop();
 
@@ -88,4 +88,4 @@ export function ResponsiveOverlay({ trigger, title, children }: ResponsiveOverla
             </Drawer>
         </>
     );
-}
+};

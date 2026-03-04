@@ -17,29 +17,25 @@ const parser = new Parser({
     },
 });
 
-function stripHtml(html: string, maxLength: number): string {
+const stripHtml = (html: string, maxLength: number): string => {
     const text = html
         .replace(/<[^>]+>/g, " ")
         .replace(/\s+/g, " ")
         .trim();
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength).trim() + "…";
-}
+};
 
-function firstImageUrl(html: string): string | undefined {
+const firstImageUrl = (html: string): string | undefined => {
     const matches = html.matchAll(/<img[^>]+src=["']([^"']+)["']/gi);
     for (const m of matches) {
         const url = m[1];
         if (url && !url.includes("medium.com/_/stat") && !url.includes("stat?")) return url;
     }
     return undefined;
-}
+};
 
-/**
- * Fetches and parses the Medium RSS feed. Use in server components only.
- * Cached and revalidated every 15 minutes.
- */
-export async function getMediumPosts(limit = 10): Promise<MediumPost[]> {
+export const getMediumPosts = async (limit = 10): Promise<MediumPost[]> => {
     try {
         const res = await fetch(MEDIUM_FEED_URL, {
             next: { revalidate: 900 },
@@ -65,4 +61,4 @@ export async function getMediumPosts(limit = 10): Promise<MediumPost[]> {
         console.error("[medium-rss] Failed to fetch or parse Medium feed:", err);
         return [];
     }
-}
+};

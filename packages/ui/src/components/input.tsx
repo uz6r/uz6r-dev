@@ -9,7 +9,7 @@ interface InputProps extends React.ComponentProps<typeof BaseInput> {
     trailingIcon?: React.ReactNode;
 }
 
-function Input({
+export const Input = ({
     inputContainerClassName,
     className,
     type,
@@ -17,7 +17,7 @@ function Input({
     trailingIcon,
     disabled,
     ...props
-}: InputProps) {
+}: InputProps) => {
     return (
         <div
             className={cn(
@@ -56,6 +56,4 @@ function Input({
             )}
         </div>
     );
-}
-
-export { Input };
+};

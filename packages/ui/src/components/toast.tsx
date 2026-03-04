@@ -21,16 +21,19 @@ const TOAST_ICONS: {
     warning: <TriangleAlert />,
 };
 
-function ToastProvider({ children, ...props }: React.ComponentProps<typeof Toast.Provider>) {
+export const ToastProvider = ({
+    children,
+    ...props
+}: React.ComponentProps<typeof Toast.Provider>) => {
     return (
         <Toast.Provider toastManager={toastManager} {...props}>
             {children}
             <ToastList />
         </Toast.Provider>
     );
-}
+};
 
-function ToastList() {
+const ToastList = () => {
     const { toasts } = useToast();
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
@@ -125,6 +128,4 @@ function ToastList() {
             </Toast.Viewport>
         </Toast.Portal>
     );
-}
-
-export { ToastProvider };
+};

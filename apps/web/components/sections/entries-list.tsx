@@ -9,7 +9,7 @@ interface EntriesListProps {
     title?: string;
 }
 
-export function EntriesList({ entries, title = "Writing & talks" }: EntriesListProps) {
+export const EntriesList = ({ entries, title = "Writing & talks" }: EntriesListProps) => {
     return (
         <Section>
             <Container>
@@ -62,4 +62,4 @@ export function EntriesList({ entries, title = "Writing & talks" }: EntriesListP
             </Container>
         </Section>
     );
-}
+};

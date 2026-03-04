@@ -22,7 +22,7 @@ const SOCIAL_LINKS = [
     { href: "https://www.tiktok.com/@uzair.zahari", label: "TikTok", icon: TikTokIcon },
 ] as const;
 
-export function Footer() {
+export const Footer = () => {
     return (
         <footer className="py-6">
             <Separator className="mb-6" />
@@ -53,4 +53,4 @@ export function Footer() {
             </Container>
         </footer>
     );
-}
+};

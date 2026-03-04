@@ -21,7 +21,7 @@ const PAGE_LINKS = [
     { href: "/contact", label: "Contact", icon: Mail },
 ] as const;
 
-export function PageCommandPalette() {
+export const PageCommandPalette = () => {
     const ctx = useCommandPalette();
     const router = useRouter();
 
@@ -65,4 +65,4 @@ export function PageCommandPalette() {
             </CommandList>
         </CommandDialog>
     );
-}
+};

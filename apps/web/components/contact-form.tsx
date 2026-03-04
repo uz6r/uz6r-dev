@@ -16,7 +16,7 @@ import { cn } from "@repo/ui/utils";
 // local state keeps form logic isolated.
 // Submitting to formsubmit.co from the client so their first-time confirmation email is triggered.
 
-export function ContactForm({ contactToEmail }: { contactToEmail: string }) {
+export const ContactForm = ({ contactToEmail }: { contactToEmail: string }) => {
     const [loading, setLoading] = useState(false);
     const { add } = useToast();
 
@@ -124,4 +124,4 @@ export function ContactForm({ contactToEmail }: { contactToEmail: string }) {
             </form>
         </Form>
     );
-}
+};

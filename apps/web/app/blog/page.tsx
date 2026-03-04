@@ -4,7 +4,7 @@ import { Section } from "@/components/layout/section";
 import { BlogSection } from "@/components/sections/blog-section";
 import { getMediumPosts } from "@/lib/medium-rss";
 
-export default async function BlogPage() {
+const BlogPage = async () => {
     const posts = await getMediumPosts(20);
 
     return (
@@ -24,4 +24,6 @@ export default async function BlogPage() {
             </main>
         </>
     );
-}
+};
+
+export default BlogPage;
