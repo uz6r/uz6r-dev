@@ -27,7 +27,7 @@ function useIsDesktop() {
 
 interface ResponsiveOverlayProps {
     trigger: React.ReactNode;
-    title: string;
+    title: React.ReactNode;
     children: React.ReactNode;
 }
 

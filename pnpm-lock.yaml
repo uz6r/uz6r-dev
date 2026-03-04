@@ -31,9 +31,6 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -58,9 +55,6 @@ importers:
       rss-parser:
         specifier: ^3.13.0
         version: 3.13.0
-      tailwind-merge:
-        specifier: ^2.6.0
-        version: 2.6.1
       zod:
         specifier: ^4.3.6
         version: 4.3.6

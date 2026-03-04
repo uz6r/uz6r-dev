@@ -15,4 +15,12 @@ export interface Entry {
 
 export interface ProjectMetadata {
     stack?: string[];
+    state?:
+        | "PUBLISHED"
+        | "READ_ONLY"
+        | "ARCHIVED"
+        | "WIP"
+        | "EXPERIMENTAL"
+        | "MAINTENANCE"
+        | "PROPOSED";
 }
