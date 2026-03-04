@@ -36,13 +36,11 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             # Deploy from repo root so full monorepo is uploaded; Vercel Root Directory must be "apps/web".
+            - name: Install Vercel CLI
+              run: npm install --global vercel@latest
+
             - name: Deploy to Vercel (preview / development)
-              uses: amondnet/vercel-action@v25
-              with:
-                  vercel-token: ${{ secrets.VERCEL_TOKEN }}
-                  vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-                  vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-                  working-directory: .
-                  github-comment: false
+              run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }} && vercel build --token=${{ secrets.VERCEL_TOKEN }} && vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
               env:
-                  PATH: /usr/bin:/usr/local/bin:${{ github.workspace }}/node_modules/.bin:${{ env.PATH }}
+                  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+                  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
