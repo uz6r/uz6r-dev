@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { CommandPaletteProvider } from "@/components/command-palette-context";
-import { ToastProvider } from "@/components/ui/toast";
+import { ToastProvider } from "@repo/ui/toast";
 import { Footer } from "@/components/layout/footer";
 import { A2HSBanner } from "@/components/a2hs-banner";
 import { PageCommandPalette } from "@/components/page-command-palette";
@@ -47,12 +47,10 @@ export default function RootLayout({
                 className="root antialiased safe-area-insets bg-background text-foreground"
                 suppressHydrationWarning
             >
-                <div className="bg-background flex min-h-dvh flex-col" suppressHydrationWarning>
+                <div className="bg-background flex min-h-dvh flex-col">
                     <CommandPaletteProvider>
                         <ToastProvider>
-                            <div className="min-h-0 flex-1" suppressHydrationWarning>
-                                {children}
-                            </div>
+                            <div className="min-h-0 flex-1">{children}</div>
                             <Footer />
                             <PageCommandPalette />
                             <A2HSBanner />

@@ -1,49 +1,34 @@
-# 9ui Manual Component Setup — TODOs
+# 9ui Component Library
 
-9ui uses **copy-paste / add-on-demand** components. You add each component explicitly — no bundle bloat.
+`packages/ui` uses [9ui](https://9ui.dev) copy-paste components via the shadcn CLI.
 
-## Structure for manual imports
+## Structure
 
 ```text
 packages/ui/
 ├── src/
 │   ├── components/           # One file per 9ui component
-│   │   ├── avatar.tsx        ✓ (added)
-│   │   ├── button.tsx        ✓ (added)
-│   │   ├── card.tsx          TODO: npx shadcn add @9ui/card
-│   │   ├── input.tsx         TODO: npx shadcn add @9ui/input
-│   │   └── ...
 │   └── lib/
-│       └── utils.ts          ✓ (cn helper)
-├── 9UI_TODOS.md
-├── components.json           ✓ (9ui registry)
+│       └── utils.ts          # cn() helper
+├── components.json           # 9ui registry config
 └── package.json
 ```
 
-## Import pattern (per-component)
-
-In `apps/web` (or any app):
+## Import pattern
 
 ```tsx
-// Import each component individually — no barrel exports
 import { Button } from "@repo/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@repo/ui/avatar";
 import { Card } from "@repo/ui/card";
 ```
 
-New components in `src/components/` are exposed via the wildcard export; no need to add each to `package.json`.
+New components in `src/components/` are exposed via the wildcard export — no need to update `package.json`.
 
-## TODOs
+## Adding components
 
-- [ ] Run `npx shadcn@latest add @9ui/init` from **packages/ui** (or apps/web if you prefer styles there)
-- [ ] Add `root` class to apps/web layout: `<body className="root antialiased">` ✓ (done)
-- [ ] **Note**: In packages/ui, use `@/lib/utils` for `cn` — tsconfig has `@/*` → `./src/*`
-- [ ] Add components as needed: `cd packages/ui && npx shadcn add @9ui/card`
-- [ ] Run `npx shadcn@latest mcp init` (optional) for AI-assisted component usage
+```sh
+cd packages/ui && npx shadcn add @9ui/<name>
+```
 
-## Available 9ui components
-
-Add with: `npx shadcn add @9ui/<name>`
-
-Examples: `button`, `card`, `input`, `dialog`, `dropdown-menu`, `tabs`, `avatar`, `badge`, `select`, `checkbox`, etc.  
+Examples: `button`, `card`, `input`, `dialog`, `dropdown-menu`, `tabs`, `avatar`, `badge`, `select`, `checkbox`, etc.
 Full list: <https://9ui.dev/docs/components>

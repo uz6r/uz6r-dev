@@ -117,11 +117,16 @@
     }
 }
 
-/* No focus ring/outline globally — flat UI, no focus chrome on buttons/inputs/items */
-*:focus,
-*:focus-visible {
+/* Remove default browser outline; replace with a custom focus-visible ring
+   for keyboard users. Mouse clicks use :focus (no ring); keyboard nav
+   triggers :focus-visible (ring shown). WCAG 2.4.7 compliant. */
+*:focus {
     outline: none;
-    box-shadow: none;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
 }
 
 /* Command palette: minimal box, no extra border on inner command */

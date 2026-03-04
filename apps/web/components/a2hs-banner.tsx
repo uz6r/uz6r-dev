@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@repo/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@repo/ui/drawer";
-import { useToast } from "@/components/ui/toast";
+import { useToast } from "@repo/ui/toast";
 import { useActiveTimer } from "@/lib/useActiveTimer";
 
 const COOKIE_NAME = "a2hs";
@@ -27,14 +27,23 @@ function setCookie(name: string, value: string) {
 
 function isMobileIOS(): boolean {
     if (typeof navigator === "undefined") return false;
+    // Prefer modern userAgentData API; fall back to deprecated UA string.
+    const uad = (navigator as { userAgentData?: { platform?: string } }).userAgentData;
+    if (uad?.platform) {
+        return /iOS/i.test(uad.platform);
+    }
     return (
         /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+        (navigator.maxTouchPoints > 1 && /Macintosh/i.test(navigator.userAgent))
     );
 }
 
 function isMobileAndroid(): boolean {
     if (typeof navigator === "undefined") return false;
+    const uad = (navigator as { userAgentData?: { platform?: string } }).userAgentData;
+    if (uad?.platform) {
+        return /Android/i.test(uad.platform);
+    }
     return /Android/.test(navigator.userAgent);
 }
 

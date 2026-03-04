@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
@@ -41,12 +42,13 @@ export function BlogSection({ posts, title = "Blog", showAllLink }: BlogSectionP
                                     <ExternalLink className="size-4" aria-hidden />
                                 </span>
                                 {post.imageUrl && (
-                                    <div className="aspect-video w-full overflow-hidden bg-muted">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img
+                                    <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                                        <Image
                                             src={post.imageUrl}
                                             alt=""
-                                            className="h-full w-full object-cover"
+                                            fill
+                                            sizes="(max-width: 640px) 100vw, 50vw"
+                                            className="object-cover"
                                         />
                                     </div>
                                 )}

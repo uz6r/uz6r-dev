@@ -6,9 +6,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@repo/ui/input";
 import { Textarea } from "@repo/ui/textarea";
-import { Button } from "@/components/button";
+import { Button } from "@repo/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@repo/ui/form";
-import { useToast } from "@/components/ui/toast";
+import { useToast } from "@repo/ui/toast";
 import { contactFormSchema, type ContactFormValues } from "@/app/contact/schema";
 import { cn } from "@repo/ui/utils";
 

@@ -61,7 +61,8 @@ export async function getMediumPosts(limit = 10): Promise<MediumPost[]> {
                 imageUrl: firstImageUrl(rawContent),
             };
         });
-    } catch {
+    } catch (err) {
+        console.error("[medium-rss] Failed to fetch or parse Medium feed:", err);
         return [];
     }
 }
