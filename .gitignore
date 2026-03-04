@@ -34,3 +34,9 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Generated files
+/apps/api/bin/server
+/apps/web/next-env.d.ts
+/apps/web/public/sw.js
+/apps/web/public/workbox-*.js

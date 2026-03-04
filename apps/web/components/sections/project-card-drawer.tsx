@@ -22,7 +22,7 @@ function getStateVariant(state?: string) {
         case "WIP":
         case "PROPOSED":
             return "warning";
-        case "READ_ONLY":
+        case "READONLY":
         case "ARCHIVED":
         default:
             return "secondary";

@@ -17,7 +17,7 @@ export interface ProjectMetadata {
     stack?: string[];
     state?:
         | "PUBLISHED"
-        | "READ_ONLY"
+        | "READONLY"
         | "ARCHIVED"
         | "WIP"
         | "EXPERIMENTAL"

@@ -29,7 +29,7 @@ export const entries: Entry[] = [
             'An open-source Python script leveraging NLTK and TextBlob to "humanize" AI-generated text for more natural readability.',
         url: "https://github.com/uz6r/text-rewriter",
         published: "2023",
-        metadata: { stack: ["Python", "NLTK", "TextBlob"], state: "READ_ONLY" },
+        metadata: { stack: ["Python", "NLTK", "TextBlob"], state: "READONLY" },
     },
     {
         id: "dotfiles",
