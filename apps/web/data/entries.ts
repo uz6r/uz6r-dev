@@ -9,7 +9,7 @@ export const entries: Entry[] = [
             "Async Python engine for polling reservation availability via reverse-engineered APIs. Built to study rate-limiting, Altcha challenges, and automated bot defenses.",
         url: "https://github.com/uz6r/lembayung",
         published: "2026",
-        metadata: { stack: ["Python", "AsyncIO"], state: "PUBLISHED" },
+        metadata: { stack: ["Python", "AsyncIO"], state: "EXPERIMENTAL" },
     },
     {
         id: "orders-dashboard",
@@ -31,16 +31,7 @@ export const entries: Entry[] = [
         published: "2023",
         metadata: { stack: ["Python", "NLTK", "TextBlob"], state: "READONLY" },
     },
-    {
-        id: "dotfiles",
-        type: "project",
-        title: "dotfiles",
-        description:
-            "My personal dotfiles managed as infra-as-code using GNU stow with an automated bootstrap setup and CI linting workflow.",
-        url: "https://github.com/uz6r/dotfiles",
-        published: "2025",
-        metadata: { stack: ["Shell", "Make", "GNU Stow"], state: "PUBLISHED" },
-    },
+
     {
         id: "nadi",
         type: "project",

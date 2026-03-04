@@ -29,6 +29,16 @@ function getStateVariant(state?: string) {
     }
 }
 
+const STATE_LABELS: Record<string, string> = {
+    PUBLISHED: "Published",
+    READONLY: "Read-only",
+    ARCHIVED: "Archived",
+    WIP: "WIP",
+    EXPERIMENTAL: "Experimental",
+    MAINTENANCE: "Maintenance",
+    PROPOSED: "Proposed",
+};
+
 interface ProjectCardDrawerProps {
     entry: Entry;
 }
@@ -44,9 +54,9 @@ export function ProjectCardDrawer({ entry }: ProjectCardDrawerProps) {
             {meta?.state && (
                 <Badge
                     variant={getStateVariant(meta.state)}
-                    className="text-[10px] h-5 px-1.5 font-medium uppercase tracking-wider"
+                    className="text-[10px] h-5 px-1.5 font-medium tracking-wider"
                 >
-                    {meta.state.replace("_", " ")}
+                    {STATE_LABELS[meta.state] || meta.state}
                 </Badge>
             )}
         </div>

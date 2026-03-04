@@ -1,7 +1,7 @@
 # uz6r
 
-[![ci-api](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml)
-[![ci-web](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml)
+[![ci-api](https://github.com/uz6r/uz6r-dev/actions/workflows/ci-api.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-api.yml)
+[![ci-web](https://github.com/uz6r/uz6r-dev/actions/workflows/ci-web.yml/badge.svg)](https://github.com/uz6r/uz6r/actions/workflows/ci-web.yml)
 [![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=node.js)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-10.29.3-F69220?logo=pnpm)](https://pnpm.io/)
 

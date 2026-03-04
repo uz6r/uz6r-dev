@@ -12,7 +12,7 @@ export const experience: ExperienceItem[] = [
         id: "courtsite",
         company: "Courtsite",
         role: "Software Engineer, Full Stack",
-        period: "2022 – Present",
+        period: "2023 – Present",
         highlights: [
             "Booking system features for real-time venue discovery.",
             "Scaled platform from ~97k to 700k+ users.",
@@ -28,7 +28,7 @@ export const experience: ExperienceItem[] = [
         id: "dwebly",
         company: "Dwebly",
         role: "Frontend Developer",
-        period: "2021 – 2022",
+        period: "2022 – 2023",
         highlights: [
             "Vue.js and Nuxt.js headless ecommerce platform.",
             "REST API integrations.",
@@ -39,7 +39,7 @@ export const experience: ExperienceItem[] = [
         id: "thc",
         company: "The Hacker Collective",
         role: "Junior Software Developer",
-        period: "2020 – 2021",
+        period: "2021 – 2022",
         highlights: [
             "Shipped UI components and production features.",
             "Code reviews and deployments.",
