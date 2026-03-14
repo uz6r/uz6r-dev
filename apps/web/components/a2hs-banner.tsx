@@ -10,7 +10,7 @@ const COOKIE_NAME = "a2hs";
 const MAX_NOT_NOW = 7;
 const COOKIE_MAX_AGE_DAYS = 365;
 const DESKTOP_BREAKPOINT = "(min-width: 768px)";
-const A2HS_TOAST_ACTIVE_SECONDS = 120;
+const A2HS_TOAST_ACTIVE_SECONDS = 90;
 
 const getCookie = (name: string): string | null => {
     if (typeof document === "undefined") return null;
@@ -134,12 +134,12 @@ export const A2HSBanner = () => {
         if (!shouldShowBanner()) return;
         queueMicrotask(() => {
             setIsIOS(isMobileIOS());
-            setVisible(true);
         });
     }, []);
 
     useEffect(() => {
         if (
+            visible ||
             toastShownRef.current ||
             activeSeconds < A2HS_TOAST_ACTIVE_SECONDS ||
             !shouldShowBanner()
@@ -147,12 +147,15 @@ export const A2HSBanner = () => {
             return;
         }
         toastShownRef.current = true;
-        add({
-            title: "Add to Home Screen",
-            description: "Install this app for quick access from your home screen.",
-            type: "info",
+        queueMicrotask(() => {
+            setVisible(true);
+            add({
+                title: "Add to Home Screen",
+                description: "Install this app for quick access from your home screen.",
+                type: "info",
+            });
         });
-    }, [activeSeconds, add]);
+    }, [activeSeconds, add, visible]);
 
     const handleNotNow = () => {
         const val = getCookie(COOKIE_NAME);

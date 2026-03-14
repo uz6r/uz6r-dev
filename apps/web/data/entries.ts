@@ -2,6 +2,19 @@ import type { Entry } from "@/types/entry";
 
 export const entries: Entry[] = [
     {
+        id: "tracepace",
+        type: "project",
+        title: "tracepace",
+        description:
+            "High-performance race data visualizer that transforms fitness activity files (.fit and .gpx) into minimalist, gallery-quality race posters.",
+        url: "https://github.com/uz6r/tracepace",
+        published: "2026",
+        metadata: {
+            stack: ["Next.js", "TypeScript", "Go", "Mapbox"],
+            state: "MAINTENANCE",
+        },
+    },
+    {
         id: "lembayung",
         type: "project",
         title: "lembayung",
@@ -21,17 +34,6 @@ export const entries: Entry[] = [
         published: "2026",
         metadata: { stack: ["Vue 3", "Vite", "Node.js", "Express", "MySQL"], state: "PUBLISHED" },
     },
-    {
-        id: "text-rewriter",
-        type: "project",
-        title: "text-rewriter",
-        description:
-            'An open-source Python script leveraging NLTK and TextBlob to "humanize" AI-generated text for more natural readability.',
-        url: "https://github.com/uz6r/text-rewriter",
-        published: "2023",
-        metadata: { stack: ["Python", "NLTK", "TextBlob"], state: "READONLY" },
-    },
-
     {
         id: "nadi",
         type: "project",
