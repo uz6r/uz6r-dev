@@ -11,12 +11,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@repo/ui/toast";
 import { contactFormSchema, type ContactFormValues } from "@/app/contact/schema";
 import { cn } from "@repo/ui/utils";
+import { submitContactForm } from "@/app/contact/actions";
 
-// Loading blocks only the submit button; inputs stay editable.
-// local state keeps form logic isolated.
-// Submitting to formsubmit.co from the client so their first-time confirmation email is triggered.
-
-export const ContactForm = ({ contactToEmail }: { contactToEmail: string }) => {
+export const ContactForm = () => {
     const [loading, setLoading] = useState(false);
     const { add } = useToast();
 
@@ -30,30 +27,21 @@ export const ContactForm = ({ contactToEmail }: { contactToEmail: string }) => {
 
     async function onSubmit(data: ContactFormValues) {
         if (loading) return;
-        if (!contactToEmail?.trim()) {
-            add({ title: "Contact form is not configured.", type: "error" });
-            return;
-        }
         setLoading(true);
+
         try {
-            const res = await fetch(
-                `https://formsubmit.co/ajax/${encodeURIComponent(contactToEmail.trim())}`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", Accept: "application/json" },
-                    body: JSON.stringify({
-                        name: data.name,
-                        email: data.email,
-                        message: data.message,
-                    }),
-                }
-            );
-            const body = await res.json().catch(() => ({}));
-            if (!res.ok) {
-                const msg = (body as { message?: string })?.message ?? "Failed to send message.";
-                add({ title: msg, type: "error" });
+            const formData = new FormData();
+            formData.append("name", data.name);
+            formData.append("email", data.email);
+            formData.append("message", data.message);
+
+            const result = await submitContactForm(null, formData);
+
+            if (!result.ok) {
+                add({ title: result.error, type: "error" });
                 return;
             }
+
             add({ title: "Message sent successfully.", type: "primary" });
             form.reset();
         } catch (e) {

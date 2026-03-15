@@ -29,11 +29,7 @@ const ContactPage = () => {
                                 Send a message and I&apos;ll get back to you.
                             </p>
                         </div>
-                        <ContactForm
-                            contactToEmail={
-                                process.env.CONTACT_TO_EMAIL?.trim() || "aluzairzahari@gmail.com"
-                            }
-                        />
+                        <ContactForm />
                     </Container>
                 </Section>
             </main>
