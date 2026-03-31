@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import { CommandPaletteProvider } from "@/components/command-palette-context";
 import { ToastProvider } from "@repo/ui/toast";
 import { Footer } from "@/components/layout/footer";
@@ -54,6 +55,7 @@ const RootLayout = ({
                             <Footer />
                             <PageCommandPalette />
                             <A2HSBanner />
+                            <Analytics />
                         </ToastProvider>
                     </CommandPaletteProvider>
                 </div>

@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import path from "path";
 import withPWAInit from "@ducanh2912/next-pwa";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const withPWA = withPWAInit({
     dest: "public",
@@ -23,4 +24,15 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default withPWA(nextConfig);
+const sentryWebpackPluginOptions = {
+    org: process.env.SENTRY_ORG || "uz6r",
+    project: process.env.SENTRY_PROJECT || "web",
+    silent: !process.env.CI,
+    widenClientFileUpload: true,
+    hideSourceMaps: true,
+    debug: false,
+};
+
+const withSentry = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
+
+export default withPWA(withSentry);
