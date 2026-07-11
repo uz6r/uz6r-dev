@@ -1,21 +1,11 @@
 export const aboutData = {
-    intro: "I'm a full stack software engineer focused on building and scaling high-performance web applications—Next.js, TypeScript, Python, Go, GraphQL, SQLAlchemy, PostgreSQL, and Temporal are my usual tools.",
-    role: "Right now I'm at Courtsite, Malaysia's progressive web app for sports venue booking and a B2B2C aggregator platform. I work across frontend architecture, backend services, GraphQL APIs, workflow orchestration, and infrastructure.",
-    stack: [
-        "Next.js",
-        "TypeScript",
-        "Python",
-        "Go",
-        "GraphQL",
-        "SQLAlchemy",
-        "PostgreSQL",
-        "Temporal",
-    ],
+    intro: "Full stack engineer with 4 years of production experience building systems that scale and survive real-world load. My stack is Next.js, TypeScript, Python, Go, GraphQL, PostgreSQL, and Temporal.",
+    role: "I've built and scaled high-traffic web platforms across frontend architecture, backend services, distributed workflows, and infrastructure — now doing it at GX Bank, Malaysia's first and leading digital bank.",
+    stack: ["Next.js", "TypeScript", "Python", "Go", "GraphQL", "PostgreSQL", "Temporal"],
     personal: {
-        athletics:
-            "Marathoner with a disciplined hybrid approach: strength training alongside distance running.",
-        interests: "Sim racing enthusiast, Formula 1 fan, and cinephile—I like stories that stick.",
+        athletics: "Marathoner. TracePace turns .fit and .gpx run files into exportable posters.",
+        interests:
+            "F1 fan, sim racer, cinephile — I believe the best engineers are never really off the clock.",
     },
-    philosophy:
-        "I care about ownership, disciplined execution, and long-term systems thinking. The same mindset that keeps me showing up for training applies to building systems that last.",
+    philosophy: "Based in Petaling Jaya. Drop a message anytime.",
 };
